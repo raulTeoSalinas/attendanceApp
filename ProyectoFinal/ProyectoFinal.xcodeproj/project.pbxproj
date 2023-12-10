@@ -14,6 +14,7 @@
 		954808A12B230B420073A275 /* ProyectoFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808A02B230B420073A275 /* ProyectoFinalTests.swift */; };
 		954808AB2B230B420073A275 /* ProyectoFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */; };
 		954808AD2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */; };
+		955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5B72B267699006B7A66 /* MenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		954808A62B230B420073A275 /* ProyectoFinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProyectoFinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITests.swift; sourceTree = "<group>"; };
 		954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		955BB5B72B267699006B7A66 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,9 @@
 		954808822B230B410073A275 = {
 			isa = PBXGroup;
 			children = (
+				954808BB2B230C3D0073A275 /* Models */,
+				954808BA2B230C300073A275 /* Views */,
+				954808B92B230C1A0073A275 /* Controllers */,
 				9548088D2B230B410073A275 /* ProyectoFinal */,
 				9548089F2B230B420073A275 /* ProyectoFinalTests */,
 				954808A92B230B420073A275 /* ProyectoFinalUITests */,
@@ -96,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				9548088E2B230B410073A275 /* ProyectoFinalApp.swift */,
-				954808902B230B410073A275 /* ContentView.swift */,
 				954808922B230B420073A275 /* Assets.xcassets */,
 				954808942B230B420073A275 /* ProyectoFinal.entitlements */,
 				954808952B230B420073A275 /* Preview Content */,
@@ -127,6 +131,29 @@
 				954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */,
 			);
 			path = ProyectoFinalUITests;
+			sourceTree = "<group>";
+		};
+		954808B92B230C1A0073A275 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		954808BA2B230C300073A275 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				954808902B230B410073A275 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		954808BB2B230C3D0073A275 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				955BB5B72B267699006B7A66 /* MenuItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */,
 				954808912B230B410073A275 /* ContentView.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
 			);
