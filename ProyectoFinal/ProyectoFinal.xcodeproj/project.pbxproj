@@ -13,6 +13,7 @@
 		954808A12B230B420073A275 /* ProyectoFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808A02B230B420073A275 /* ProyectoFinalTests.swift */; };
 		954808AB2B230B420073A275 /* ProyectoFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */; };
 		954808AD2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */; };
+		955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955160D52B2786F1008D2DFF /* AsistenciaView.swift */; };
 		955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5B72B267699006B7A66 /* MenuItem.swift */; };
 		955BB5C12B268C57006B7A66 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 955BB5C02B268C57006B7A66 /* GRDB */; };
 		955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C22B268D6B006B7A66 /* Persistence.swift */; };
@@ -21,7 +22,9 @@
 		955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CC2B269B27006B7A66 /* HomeView.swift */; };
 		955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CE2B269D17006B7A66 /* EntityList.swift */; };
 		955BB5D12B26A6CF006B7A66 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D02B26A6CF006B7A66 /* ViewModel.swift */; };
-		955BB5D32B26AB21006B7A66 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D22B26AB21006B7A66 /* RecordView.swift */; };
+		955BB5D32B26AB21006B7A66 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D22B26AB21006B7A66 /* PersonView.swift */; };
+		955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D62B26FCF6006B7A66 /* Grupo.swift */; };
+		955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5DA2B2701F5006B7A66 /* GrupoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,7 @@
 		954808A62B230B420073A275 /* ProyectoFinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProyectoFinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITests.swift; sourceTree = "<group>"; };
 		954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		955160D52B2786F1008D2DFF /* AsistenciaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistenciaView.swift; sourceTree = "<group>"; };
 		955BB5B72B267699006B7A66 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		955BB5C22B268D6B006B7A66 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		955BB5C42B268E33006B7A66 /* Profesor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profesor.swift; sourceTree = "<group>"; };
@@ -59,7 +63,9 @@
 		955BB5CC2B269B27006B7A66 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		955BB5CE2B269D17006B7A66 /* EntityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityList.swift; sourceTree = "<group>"; };
 		955BB5D02B26A6CF006B7A66 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		955BB5D22B26AB21006B7A66 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		955BB5D22B26AB21006B7A66 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
+		955BB5D62B26FCF6006B7A66 /* Grupo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grupo.swift; sourceTree = "<group>"; };
+		955BB5DA2B2701F5006B7A66 /* GrupoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				955BB5C22B268D6B006B7A66 /* Persistence.swift */,
+				955BB5D02B26A6CF006B7A66 /* ViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -160,7 +167,9 @@
 			children = (
 				955BB5CC2B269B27006B7A66 /* HomeView.swift */,
 				955BB5CE2B269D17006B7A66 /* EntityList.swift */,
-				955BB5D22B26AB21006B7A66 /* RecordView.swift */,
+				955BB5D22B26AB21006B7A66 /* PersonView.swift */,
+				955BB5DA2B2701F5006B7A66 /* GrupoView.swift */,
+				955160D52B2786F1008D2DFF /* AsistenciaView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,7 +180,7 @@
 				955BB5B72B267699006B7A66 /* MenuItem.swift */,
 				955BB5C42B268E33006B7A66 /* Profesor.swift */,
 				955BB5C62B268F46006B7A66 /* Alumno.swift */,
-				955BB5D02B26A6CF006B7A66 /* ViewModel.swift */,
+				955BB5D62B26FCF6006B7A66 /* Grupo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -313,14 +322,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				955BB5D12B26A6CF006B7A66 /* ViewModel.swift in Sources */,
-				955BB5D32B26AB21006B7A66 /* RecordView.swift in Sources */,
+				955BB5D32B26AB21006B7A66 /* PersonView.swift in Sources */,
 				955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */,
 				955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */,
 				955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */,
 				955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */,
 				955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */,
+				955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
 				955BB5C52B268E33006B7A66 /* Profesor.swift in Sources */,
+				955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */,
+				955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

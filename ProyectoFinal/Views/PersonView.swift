@@ -11,15 +11,11 @@ struct RecordView: View {
     
     let typeEntity: String
     let idRecord: String
-//
-//    let persistence: Persistence = Persistence()
-//    let alumnoFound: Alumno
-//    let profesorFound: Profesor
+
     let record: Any
-    let persistence: Persistence = Persistence();
     
     @EnvironmentObject var viewModel: ViewModel
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var id: String = ""
     @State private var name: String = ""
@@ -44,34 +40,36 @@ struct RecordView: View {
         }
     
     func handleUpdate() {
-        if record is Alumno {
+        switch typeEntity {
+        case "Alumnos":
             let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
             viewModel.updateAlumno(withId: idRecord, record: alumno)
-
-            
-        } else if record is Profesor {
+        case "Profesores":
             let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
             viewModel.updateProfesor(withId: idRecord, record: profesor)
-           
-        } else {
+
+        default:
             // Manejar otros casos si es necesario
-            print("El tipo de objeto no es ni Alumno ni Profesor")
+            print("El tipo de entidad no es válido")
         }
+        
+        // Después de la actualización, navegar hacia atrás
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleDelete() {
-        if record is Alumno {
-            
+        switch typeEntity {
+        case "Alumnos":
             viewModel.deleteAlumno(withId: idRecord)
-            
-        } else if record is Profesor {
-            
+        case "Profesores":
             viewModel.deleteProfesor(withId: idRecord)
-           
-        } else {
+        default:
             // Manejar otros casos si es necesario
-            print("El tipo de objeto no es ni Alumno ni Profesor")
+            print("El tipo de entidad no es válido")
         }
+        
+        // Después de la eliminación, navegar hacia atrás
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleCreate() {
@@ -83,13 +81,11 @@ struct RecordView: View {
         case "Profesores":
             let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
             viewModel.createProfesor(profesor: profesor)
-        case "Materias":
-            // Crea lógica para manejar el caso de Materia si es necesario
-            print("Crear lógica para manejar Materia")
         default:
             // Manejar otros casos si es necesario
             print("El tipo de entidad no es válido")
         }
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleScan() {
@@ -103,11 +99,10 @@ struct RecordView: View {
             if idRecord.isEmpty {
                 HStack{
                     Text("ID:")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                    .padding(.leading)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .padding(.leading)
                     TextField("Ingrese id", text: $id)
-
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         handleScan()

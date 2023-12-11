@@ -39,6 +39,14 @@ struct Persistence {
                     t.column("academicId", .text).notNull()
                 }
             }
+            
+            try dbQueue.write { db in
+                try db.create(table: "grupo") { t in
+                    t.primaryKey("id", .text).notNull()
+                    t.column("materia", .text).notNull()
+                    t.column("carrera", .text).notNull()
+                }
+            }
 
             // 4. Write and read in the database
             try dbQueue.write { db in
@@ -53,6 +61,13 @@ struct Persistence {
                 try Profesor(id: "2144", name: "Ana", lastname1: "Gutierrez", lastname2: "Fernandez", academicId: "2160").insert(db)
                 try Profesor(id: "2141", name: "Juan", lastname1: "Diaz", lastname2: "Hernandez", academicId: "2164").insert(db)
                 try Profesor(id: "2142", name: "Luis", lastname1: "Sanchez", lastname2: "Ramos", academicId: "2165").insert(db)
+            }
+            
+            try dbQueue.write { db in
+                try Grupo(id: "124124", materia: "Programacion", carrera: "Informatica").insert(db)
+                try Grupo(id: "124125", materia: "Contaduria", carrera: "Contaduria").insert(db)
+                try Grupo(id: "124126", materia: "Recursos Humanos", carrera: "Administracion").insert(db)
+                try Grupo(id: "124127", materia: "Sistemas operativos", carrera: "Informatica").insert(db)
             }
             
             
@@ -72,6 +87,18 @@ struct Persistence {
         
         return try! dbQueue.read { db in
             try Profesor.fetchAll(db)
+        }
+    }
+    
+    func grupos() -> [Grupo] {
+        
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+        
+
+        let dbQueue = try! DatabaseQueue(path: path + "/db.sqlite")
+        
+        return try! dbQueue.read { db in
+            try Grupo.fetchAll(db)
         }
     }
     
@@ -130,14 +157,39 @@ struct Persistence {
                     try profesor.update(db)
                 } else {
                     // Manejar el caso en el que el alumno con el ID dado no fue encontrado
-                    print("No se encontró un alumno con el ID \(id).")
+                    print("No se encontró un profesor con el ID \(id).")
                 }
             }
         } catch {
             // Manejar errores de la base de datos
-            print("Error al actualizar el alumno: \(error)")
+            print("Error al actualizar el profesor: \(error)")
         }
     }
+    
+    func updateGrupo(withId id: String, record: Grupo) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if var grupo = try Grupo.fetchOne(db, key: id) {
+                    // Actualizar los campos necesarios
+                    grupo.id = record.id
+                    grupo.materia = record.materia
+                    grupo.carrera = record.carrera
+                    // Ejecutar la actualización en la base de datos
+                    try grupo.update(db)
+                } else {
+                    // Manejar el caso en el que el grupo con el ID dado no fue encontrado
+                    print("No se encontró una grupo con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al actualizar el grupo: \(error)")
+        }
+    }
+    
     
     func deleteAlumno(withId id: String) {
         do {
@@ -179,6 +231,26 @@ struct Persistence {
         }
     }
     
+    func deleteGrupo(withId id: String) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if let grupo = try Grupo.fetchOne(db, key: id) {
+                    // Ejecutar la eliminación en la base de datos
+                    try grupo.delete(db)
+                } else {
+                    // Manejar el caso en el que el grupo con el ID dado no fue encontrado
+                    print("No se encontró un grupo con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al borrar el grupo: \(error)")
+        }
+    }
+    
     func createProfesor(profesor: Profesor) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
@@ -209,6 +281,20 @@ struct Persistence {
         }
     }
 
+    func createGrupo(grupo: Grupo) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                // Crear un nuevo alumno en la base de datos
+                try grupo.save(db)
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al crear el grupo: \(error)")
+        }
+    }
 
     
 }

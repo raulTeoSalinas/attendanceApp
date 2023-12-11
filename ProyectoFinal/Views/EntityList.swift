@@ -29,18 +29,25 @@ struct EntityList: View {
                             Text("\(profesor.name) \(profesor.lastname1) \(profesor.lastname2)")
                         }
                     }
-//                case "Materias":
-//                    ForEach(viewModel.materias) { materia in
-//                        Text("Materia: \(materia.name)")
-//                    }
+                case "Grupos":
+                    ForEach(viewModel.grupos) { grupo in
+                        NavigationLink(destination: GrupoView(idRecord: grupo.id, record: grupo)) {
+                            Text("\(grupo.id) (\(grupo.materia))")
+                        }
+                        
+                    }
                 default:
                     Text("Tipo de entidad no reconocido")
                 }
             }.navigationTitle(typeEntity)
             .navigationBarItems(
-                trailing: NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: "", record: {})) {
-                        Text("Crear")
-                    }
+                trailing: NavigationLink(destination:
+                    typeEntity == "Grupos" ?
+                        AnyView(GrupoView(idRecord: "", record: nil)) :
+                        AnyView(RecordView(typeEntity: typeEntity, idRecord: "", record: {}))
+                ) {
+                    Text("Crear")
+                }
             )
         }
 }
