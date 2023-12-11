@@ -11,7 +11,8 @@ import SwiftUI
 struct ProyectoFinalApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let _ = Persistence()
+            HomeView()
         }
     }
 }

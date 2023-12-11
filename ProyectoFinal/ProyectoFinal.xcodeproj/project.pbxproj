@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9548088E2B230B410073A275 /* ProyectoFinalApp.swift */; };
-		954808912B230B410073A275 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808902B230B410073A275 /* ContentView.swift */; };
 		954808932B230B420073A275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 954808922B230B420073A275 /* Assets.xcassets */; };
 		954808972B230B420073A275 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 954808962B230B420073A275 /* Preview Assets.xcassets */; };
 		954808A12B230B420073A275 /* ProyectoFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808A02B230B420073A275 /* ProyectoFinalTests.swift */; };
 		954808AB2B230B420073A275 /* ProyectoFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */; };
 		954808AD2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */; };
 		955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5B72B267699006B7A66 /* MenuItem.swift */; };
+		955BB5C12B268C57006B7A66 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 955BB5C02B268C57006B7A66 /* GRDB */; };
+		955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C22B268D6B006B7A66 /* Persistence.swift */; };
+		955BB5C52B268E33006B7A66 /* Profesor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C42B268E33006B7A66 /* Profesor.swift */; };
+		955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C62B268F46006B7A66 /* Alumno.swift */; };
+		955BB5C92B26981A006B7A66 /* ViewProfesor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C82B26981A006B7A66 /* ViewProfesor.swift */; };
+		955BB5CB2B269829006B7A66 /* ViewAlumno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CA2B269829006B7A66 /* ViewAlumno.swift */; };
+		955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CC2B269B27006B7A66 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +43,6 @@
 /* Begin PBXFileReference section */
 		9548088B2B230B410073A275 /* ProyectoFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9548088E2B230B410073A275 /* ProyectoFinalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalApp.swift; sourceTree = "<group>"; };
-		954808902B230B410073A275 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		954808922B230B420073A275 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		954808942B230B420073A275 /* ProyectoFinal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProyectoFinal.entitlements; sourceTree = "<group>"; };
 		954808962B230B420073A275 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -47,6 +52,12 @@
 		954808AA2B230B420073A275 /* ProyectoFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITests.swift; sourceTree = "<group>"; };
 		954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		955BB5B72B267699006B7A66 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		955BB5C22B268D6B006B7A66 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		955BB5C42B268E33006B7A66 /* Profesor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profesor.swift; sourceTree = "<group>"; };
+		955BB5C62B268F46006B7A66 /* Alumno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alumno.swift; sourceTree = "<group>"; };
+		955BB5C82B26981A006B7A66 /* ViewProfesor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfesor.swift; sourceTree = "<group>"; };
+		955BB5CA2B269829006B7A66 /* ViewAlumno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAlumno.swift; sourceTree = "<group>"; };
+		955BB5CC2B269B27006B7A66 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955BB5C12B268C57006B7A66 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +148,7 @@
 		954808B92B230C1A0073A275 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				955BB5C22B268D6B006B7A66 /* Persistence.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -143,7 +156,7 @@
 		954808BA2B230C300073A275 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				954808902B230B410073A275 /* ContentView.swift */,
+				955BB5CC2B269B27006B7A66 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				955BB5B72B267699006B7A66 /* MenuItem.swift */,
+				955BB5C42B268E33006B7A66 /* Profesor.swift */,
+				955BB5C82B26981A006B7A66 /* ViewProfesor.swift */,
+				955BB5C62B268F46006B7A66 /* Alumno.swift */,
+				955BB5CA2B269829006B7A66 /* ViewAlumno.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +189,9 @@
 			dependencies = (
 			);
 			name = ProyectoFinal;
+			packageProductDependencies = (
+				955BB5C02B268C57006B7A66 /* GRDB */,
+			);
 			productName = ProyectoFinal;
 			productReference = 9548088B2B230B410073A275 /* ProyectoFinal.app */;
 			productType = "com.apple.product-type.application";
@@ -244,6 +264,9 @@
 				Base,
 			);
 			mainGroup = 954808822B230B410073A275;
+			packageReferences = (
+				955BB5BF2B268C57006B7A66 /* XCRemoteSwiftPackageReference "GRDB" */,
+			);
 			productRefGroup = 9548088C2B230B410073A275 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -286,9 +309,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */,
 				955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */,
-				954808912B230B410073A275 /* ContentView.swift in Sources */,
+				955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */,
+				955BB5CB2B269829006B7A66 /* ViewAlumno.swift in Sources */,
+				955BB5C92B26981A006B7A66 /* ViewProfesor.swift in Sources */,
+				955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
+				955BB5C52B268E33006B7A66 /* Profesor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +665,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		955BB5BF2B268C57006B7A66 /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		955BB5C02B268C57006B7A66 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 955BB5BF2B268C57006B7A66 /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 954808832B230B410073A275 /* Project object */;
 }

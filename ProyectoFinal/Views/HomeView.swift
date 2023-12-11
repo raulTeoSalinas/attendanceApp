@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     
     let menuItems: [MenuItem] = [
             MenuItem(name: "Alumnos"),
@@ -39,5 +39,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }
