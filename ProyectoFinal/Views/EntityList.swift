@@ -10,25 +10,22 @@ import SwiftUI
 struct EntityList: View {
     
     let typeEntity: String
-    @StateObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     
-    init(typeEntity: String, viewModel: ViewModel) {
-        self.typeEntity = typeEntity
-        self._viewModel = StateObject(wrappedValue: viewModel)
-    }
+
     
     var body: some View {
             List {
                 switch typeEntity {
                 case "Alumnos":
                     ForEach(viewModel.alumnos) { alumno in
-                        NavigationLink(destination: RecordView(idRecord: alumno.id, record: alumno, viewModel: ViewModel())) {
+                        NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: alumno.id, record: alumno)) {
                                Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                            }
                        }
                 case "Profesores":
                     ForEach(viewModel.profesores) { profesor in
-                        NavigationLink(destination: RecordView(idRecord: profesor.id, record: profesor, viewModel: ViewModel())) {
+                        NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: profesor.id, record: profesor)) {
                             Text("\(profesor.name) \(profesor.lastname1) \(profesor.lastname2)")
                         }
                     }
@@ -39,7 +36,12 @@ struct EntityList: View {
                 default:
                     Text("Tipo de entidad no reconocido")
                 }
-            }
+            }.navigationTitle(typeEntity)
+            .navigationBarItems(
+                trailing: NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: "", record: {})) {
+                        Text("Crear")
+                    }
+            )
         }
 }
 

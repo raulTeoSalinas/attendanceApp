@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct ProyectoFinalApp: App {
+    let viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
             let _ = Persistence()

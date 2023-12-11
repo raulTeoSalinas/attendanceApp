@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecordView: View {
     
-//    var typeEntity: String
+    let typeEntity: String
     let idRecord: String
 //
 //    let persistence: Persistence = Persistence()
@@ -18,13 +18,8 @@ struct RecordView: View {
     let record: Any
     let persistence: Persistence = Persistence();
     
-    @StateObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     
-    init(idRecord: String, record: Any, viewModel: ViewModel) {
-        self.idRecord = idRecord
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        self.record = record
-    }
     
     @State private var id: String = ""
     @State private var name: String = ""
@@ -51,18 +46,52 @@ struct RecordView: View {
     func handleUpdate() {
         if record is Alumno {
             let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
-            persistence.updateAlumno(withId: idRecord, record: alumno)
             viewModel.updateAlumno(withId: idRecord, record: alumno)
 
             
         } else if record is Profesor {
-            // Realizar acciones específicas para un Profesor
+            let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
+            viewModel.updateProfesor(withId: idRecord, record: profesor)
            
         } else {
             // Manejar otros casos si es necesario
             print("El tipo de objeto no es ni Alumno ni Profesor")
         }
     }
+    
+    func handleDelete() {
+        if record is Alumno {
+            
+            viewModel.deleteAlumno(withId: idRecord)
+            
+        } else if record is Profesor {
+            
+            viewModel.deleteProfesor(withId: idRecord)
+           
+        } else {
+            // Manejar otros casos si es necesario
+            print("El tipo de objeto no es ni Alumno ni Profesor")
+        }
+    }
+    
+    func handleCreate() {
+        
+        switch typeEntity {
+        case "Alumnos":
+            let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
+            viewModel.createAlumno(alumno: alumno)
+        case "Profesores":
+            let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
+            viewModel.createProfesor(profesor: profesor)
+        case "Materias":
+            // Crea lógica para manejar el caso de Materia si es necesario
+            print("Crear lógica para manejar Materia")
+        default:
+            // Manejar otros casos si es necesario
+            print("El tipo de entidad no es válido")
+        }
+    }
+
     
     var body: some View {
         VStack() {
@@ -73,7 +102,7 @@ struct RecordView: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading)
                 TextField("Ingrese id", text: $id)
-                    .padding()
+
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             HStack{
@@ -82,7 +111,7 @@ struct RecordView: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading)
                 TextField("Ingrese nombre", text: $name)
-                    .padding()
+
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             HStack{
@@ -91,7 +120,7 @@ struct RecordView: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading)
                 TextField("Ingrese apellido 1", text: $lastname1)
-                    .padding()
+
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             HStack{
@@ -100,7 +129,7 @@ struct RecordView: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading)
                 TextField("Ingrese apellido 2", text: $lastname2)
-                    .padding()
+
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             HStack{
@@ -109,8 +138,16 @@ struct RecordView: View {
                                 .foregroundColor(.gray)
                                 .padding(.leading)
                 TextField("Ingrese número de cuenta", text: $academicId)
-                    .padding()
+  
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+            
+            if !idRecord.isEmpty {
+                Button(action: {
+                    handleDelete()
+                }) {
+                    Text("Borrar")
+                }
             }
             
             
@@ -120,12 +157,23 @@ struct RecordView: View {
                 updateProperties()
             }
             .navigationBarItems(
-                trailing: Button(action: {
-                    handleUpdate()
-                }) {
-                    Text("Actualizar")
-                }
+                trailing: {
+                    if idRecord.isEmpty {
+                        Button(action: {
+                            handleCreate()
+                        }) {
+                            Text("Crear")
+                        }
+                    } else {
+                        Button(action: {
+                            handleUpdate()
+                        }) {
+                            Text("Actualizar")
+                        }
+                    }
+                }()
             )
+
 
     }
 }

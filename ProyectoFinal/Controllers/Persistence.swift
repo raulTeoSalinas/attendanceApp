@@ -112,9 +112,103 @@ struct Persistence {
             print("Error al actualizar el alumno: \(error)")
         }
     }
-
-
     
+    func updateProfesor(withId id: String, record: Profesor) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if var profesor = try Profesor.fetchOne(db, key: id) {
+                    // Actualizar los campos necesarios
+                    profesor.id = record.id
+                    profesor.name = record.name
+                    profesor.lastname1 = record.lastname1
+                    profesor.lastname2 = record.lastname2
+                    profesor.academicId = record.academicId
+                    // Ejecutar la actualización en la base de datos
+                    try profesor.update(db)
+                } else {
+                    // Manejar el caso en el que el alumno con el ID dado no fue encontrado
+                    print("No se encontró un alumno con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al actualizar el alumno: \(error)")
+        }
+    }
+    
+    func deleteAlumno(withId id: String) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if let alumno = try Alumno.fetchOne(db, key: id) {
+                    // Ejecutar la eliminación en la base de datos
+                    try alumno.delete(db)
+                } else {
+                    // Manejar el caso en el que el alumno con el ID dado no fue encontrado
+                    print("No se encontró un alumno con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al borrar el alumno: \(error)")
+        }
+    }
+    
+    func deleteProfesor(withId id: String) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if let profesor = try Profesor.fetchOne(db, key: id) {
+                    // Ejecutar la eliminación en la base de datos
+                    try profesor.delete(db)
+                } else {
+                    // Manejar el caso en el que el profesor con el ID dado no fue encontrado
+                    print("No se encontró un profesor con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al borrar el profesor: \(error)")
+        }
+    }
+    
+    func createProfesor(profesor: Profesor) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                // Crear un nuevo profesor en la base de datos
+                try profesor.save(db)
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al crear el profesor: \(error)")
+        }
+    }
+    
+    func createAlumno(alumno: Alumno) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                // Crear un nuevo alumno en la base de datos
+                try alumno.save(db)
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al crear el alumno: \(error)")
+        }
+    }
+
 
     
 }

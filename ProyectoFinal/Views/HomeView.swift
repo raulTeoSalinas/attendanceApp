@@ -15,13 +15,11 @@ struct HomeView: View {
             MenuItem(name: "Materias")
     ]
     
-    let viewModel = ViewModel()
-    
-    
+   
     var body: some View {
         NavigationStack {
             List(menuItems) { menuItem in
-                NavigationLink(destination: EntityList(typeEntity: menuItem.name, viewModel: ViewModel())){
+                NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
                     VStack{
                         Text(menuItem.name)
                             .padding()
