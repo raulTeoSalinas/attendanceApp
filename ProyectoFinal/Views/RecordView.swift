@@ -91,20 +91,32 @@ struct RecordView: View {
             print("El tipo de entidad no es válido")
         }
     }
-
+    
+    func handleScan() {
+        let randomString = String((0..<10).map { _ in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()! })
+        id = randomString
+    }
     
     var body: some View {
         VStack() {
             
-            HStack{
-                Text("ID:")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .padding(.leading)
-                TextField("Ingrese id", text: $id)
+            if idRecord.isEmpty {
+                HStack{
+                    Text("ID:")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                                    .padding(.leading)
+                    TextField("Ingrese id", text: $id)
 
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button(action: {
+                        handleScan()
+                    }) {
+                        Text("Scanear")
+                    }
+                }
             }
+           
             HStack{
                 Text("Nombre:")
                                 .font(.caption)
