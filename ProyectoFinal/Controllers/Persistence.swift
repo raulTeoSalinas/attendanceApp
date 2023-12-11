@@ -87,5 +87,34 @@ struct Persistence {
         }
     }
     
+    func updateAlumno(withId id: String, record: Alumno) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if var alumno = try Alumno.fetchOne(db, key: id) {
+                    // Actualizar los campos necesarios
+                    alumno.id = record.id
+                    alumno.name = record.name
+                    alumno.lastname1 = record.lastname1
+                    alumno.lastname2 = record.lastname2
+                    alumno.academicId = record.academicId
+                    // Ejecutar la actualización en la base de datos
+                    try alumno.update(db)
+                } else {
+                    // Manejar el caso en el que el alumno con el ID dado no fue encontrado
+                    print("No se encontró un alumno con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al actualizar el alumno: \(error)")
+        }
+    }
+
+
+    
+
     
 }

@@ -12,7 +12,7 @@ struct ProyectoFinalApp: App {
     var body: some Scene {
         WindowGroup {
             let _ = Persistence()
-            HomeView()
+            HomeView().environmentObject(viewModel)
         }
     }
 }
