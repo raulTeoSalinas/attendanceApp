@@ -19,7 +19,7 @@ struct EntityList: View {
                 switch typeEntity {
                 case "Alumnos":
                     ForEach(viewModel.alumnos) { alumno in
-                        NavigationLink(destination: AlumnoView(typeEntity: typeEntity, idRecord: alumno.id, record: alumno)) {
+                        NavigationLink(destination: AlumnoView( idRecord: alumno.id, record: alumno)) {
                                Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                            }
                        }
@@ -32,8 +32,8 @@ struct EntityList: View {
                     }
                 case "Tarjetas":
                     ForEach(viewModel.tarjetas) { tarjeta in
-                        NavigationLink(destination: GrupoView(idRecord: grupo.id, record: grupo)) {
-                            Text("\(grupo.id) (\(grupo.materia))")
+                        NavigationLink(destination: TarjetaView( idRecord: tarjeta.id, record: tarjeta)) {
+                            Text("\(tarjeta.id)")
                         }
                         
                     }
@@ -44,8 +44,10 @@ struct EntityList: View {
             .navigationBarItems(
                 trailing: NavigationLink(destination:
                     typeEntity == "Grupos" ?
-                        AnyView(GrupoView(idRecord: "", record: nil)) :
-                        AnyView(AlumnoView(typeEntity: typeEntity, idRecord: "", record: nil))
+                    AnyView(GrupoView(idRecord: "", record: nil)) :
+                    typeEntity == "Alumnos" ?
+                    AnyView(AlumnoView(idRecord: "", record: nil)) :
+                    AnyView(TarjetaView(idRecord: "", record: nil))
                 ) {
                     Text("Crear")
                 }

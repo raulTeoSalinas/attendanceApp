@@ -40,6 +40,11 @@ class ViewModel: ObservableObject {
         self.alumnos = persistence.alumnos()
     }
     
+    func deleteTarjeta(withId id: String){
+        persistence.deleteTarjeta(withId: id)
+        self.tarjetas = persistence.tarjetas()
+    }
+    
     func deleteGrupo(withId id: String){
         persistence.deleteGrupo(withId: id)
         self.grupos = persistence.grupos()
@@ -53,5 +58,10 @@ class ViewModel: ObservableObject {
     func createGrupo(grupo: Grupo){
         persistence.createGrupo(grupo: grupo)
         self.grupos = persistence.grupos()
+    }
+    
+    func createTarjeta(tarjeta: Tarjeta){
+        persistence.createTarjeta(tarjeta: tarjeta)
+        self.tarjetas = persistence.tarjetas()
     }
 }

@@ -59,6 +59,7 @@ struct GrupoView: View {
             if idRecord.isEmpty{
                 HStack{
                 Text("ID:")
+
                 TextField("Ingrese id", text: $id)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 }

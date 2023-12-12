@@ -22,37 +22,39 @@ struct HomeView: View {
    
     var body: some View {
         NavigationStack {
-            Section(header: Text("CRUD")) {
-                List(menuItemsCrud) { menuItem in
-                    NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
+            List{
+                Section(header: Text("CRUD")) {
+                    ForEach(menuItemsCrud) { menuItem in
+                        NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
                             Text(menuItem.name)
                                 .padding()
                                 .foregroundColor(.white)
+                            
+                        }
+                        .listRowBackground(Color(red: 0.44, green: 0.27, blue: 0.96))
+                        .listRowSeparatorTint(.white)
+                        
                         
                     }
-                    .listRowBackground(Color(red: 0.44, green: 0.27, blue: 0.96))
-                    .listRowSeparatorTint(.white)
-                    
-                    
                 }
-            }
-            Section(header: Text("Asistencia")) {
-                List(menuItemsAsistencia) { menuItem in
-                    NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
- 
+                Section(header: Text("Asistencia")) {
+                    ForEach(menuItemsAsistencia) { menuItem in
+                        NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
+                            
                             Text(menuItem.name)
                                 .padding()
                                 .foregroundColor(.white)
+                            
+                        }
+                        .listRowBackground(Color(red: 0.44, green: 0.27, blue: 0.96))
+                        .listRowSeparatorTint(.white)
+                        
                         
                     }
-                    .listRowBackground(Color(red: 0.44, green: 0.27, blue: 0.96))
-                    .listRowSeparatorTint(.white)
-                    
-                    
                 }
+                .navigationTitle("Sistema Escolar")
+                
             }
-            .navigationTitle("Sistema Escolar")
-            
         }
     }
 }

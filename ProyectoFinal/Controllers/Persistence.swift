@@ -188,6 +188,26 @@ struct Persistence {
         }
     }
     
+    func deleteTarjeta(withId id: String) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                if let tarjeta = try Tarjeta.fetchOne(db, key: id) {
+                    // Ejecutar la eliminación en la base de datos
+                    try tarjeta.delete(db)
+                } else {
+                    // Manejar el caso en el que el alumno con el ID dado no fue encontrado
+                    print("No se encontró una tarjeta con el ID \(id).")
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al borrar el alumno: \(error)")
+        }
+    }
+    
     func deleteGrupo(withId id: String) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
@@ -220,6 +240,21 @@ struct Persistence {
         } catch {
             // Manejar errores de la base de datos
             print("Error al crear el alumno: \(error)")
+        }
+    }
+    
+    func createTarjeta(tarjeta: Tarjeta) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                // Crear un nuevo alumno en la base de datos
+                try tarjeta.save(db)
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al crear la tarjeta: \(error)")
         }
     }
 

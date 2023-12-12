@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AlumnoView: View {
     
-    let typeEntity: String
     let idRecord: String
 
     let record: Alumno?
@@ -77,45 +76,46 @@ struct AlumnoView: View {
     
     var body: some View {
       
-            Form{
+        Form{
+            Section(header: Text("Información Personal")) {
                 if idRecord.isEmpty {
                     HStack{
                         Text("ID:")
-
+                        
                         TextField("Ingrese id", text: $id)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         Button(action: {
                             handleScan()
                         }) {
-                            Text("Scanear")
+                            Text("Autogenerar")
                         }
                     }
                 }
                 
                 HStack{
                     Text("Nombre:")
-
+                    
                     TextField("Ingrese nombre", text: $name)
                     
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 HStack{
                     Text("Apellido 1:")
-
+                    
                     TextField("Ingrese apellido 1", text: $lastname1)
                     
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 HStack{
                     Text("Apellido 2:")
-
+                    
                     TextField("Ingrese apellido 2", text: $lastname2)
                     
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 HStack{
                     Text("Número de Cuenta:")
- 
+                    
                     TextField("Ingrese número de cuenta", text: $academicId)
                     
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -123,30 +123,11 @@ struct AlumnoView: View {
                 
                 
                 Picker("Tarjeta", selection: $selectedIdTarjeta) {
-                        ForEach(Array(viewModel.tarjetas.enumerated()), id: \.1.id) { index, tarjeta in
-                            Text(tarjeta.id)
-                                .tag(index) // Asigna un valor único (índice) como tag
-                        }
+                    ForEach(Array(viewModel.tarjetas.enumerated()), id: \.1.id) { index, tarjeta in
+                        Text(tarjeta.id)
+                            .tag(index) // Asigna un valor único (índice) como tag
+                    }
                 }
-
-
-                
-                
-                
-                
-                //            HStack{
-                //                Text("Tarjeta:")
-                //                        .font(.caption)
-                //                        .foregroundColor(.gray)
-                //                        .padding(.leading)
-                //                TextField("Ingrese tarjeta", text: $idTarjeta)
-                //                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                //                Button(action: {
-                //                        handleScan()
-                //                }) {
-                //                    Text("Scanear")
-                //                }
-                //            }
                 
                 
                 if !idRecord.isEmpty {
@@ -156,8 +137,19 @@ struct AlumnoView: View {
                         Text("Borrar")
                     }
                 }
+                
+            }
+            Section(header: Text("Materias")) {
+                HStack{
+                    Text("Nombre:")
+                    
+                    TextField("Ingrese nombre", text: $name)
+                    
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
             }
             
+        }
             
         
             .onAppear {
