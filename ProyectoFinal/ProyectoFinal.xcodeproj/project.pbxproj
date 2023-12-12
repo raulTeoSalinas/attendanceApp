@@ -25,6 +25,7 @@
 		955BB5D32B26AB21006B7A66 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D22B26AB21006B7A66 /* PersonView.swift */; };
 		955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D62B26FCF6006B7A66 /* Grupo.swift */; };
 		955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5DA2B2701F5006B7A66 /* GrupoView.swift */; };
+		95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20212B28289E00BFA2AB /* Tarjeta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		955BB5D22B26AB21006B7A66 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 		955BB5D62B26FCF6006B7A66 /* Grupo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grupo.swift; sourceTree = "<group>"; };
 		955BB5DA2B2701F5006B7A66 /* GrupoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoView.swift; sourceTree = "<group>"; };
+		95AF20212B28289E00BFA2AB /* Tarjeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tarjeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				955BB5C42B268E33006B7A66 /* Profesor.swift */,
 				955BB5C62B268F46006B7A66 /* Alumno.swift */,
 				955BB5D62B26FCF6006B7A66 /* Grupo.swift */,
+				95AF20212B28289E00BFA2AB /* Tarjeta.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */,
 				955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
+				95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */,
 				955BB5C52B268E33006B7A66 /* Profesor.swift in Sources */,
 				955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */,
 				955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */,

@@ -21,14 +21,25 @@ struct Persistence {
 
             // 2. Define the database schema
             try dbQueue.write { db in
+                try db.create(table: "tarjeta") { t in
+                    t.primaryKey("id", .text).notNull()
+                }
+            }
+            
+            try dbQueue.write { db in
                 try db.create(table: "alumno") { t in
                     t.primaryKey("id", .text).notNull()
                     t.column("name", .text).notNull()
                     t.column("lastname1", .text).notNull()
                     t.column("lastname2", .text).notNull()
                     t.column("academicId", .text).notNull()
+                    t.column("idTarjeta", .text).notNull()
+                    
+                    t.foreignKey(["idTarjeta"], references: "tarjeta", onDelete: .cascade)
                 }
             }
+            
+
             
             try dbQueue.write { db in
                 try db.create(table: "profesor") { t in
@@ -47,13 +58,20 @@ struct Persistence {
                     t.column("carrera", .text).notNull()
                 }
             }
-
+            
+            try dbQueue.write { db in
+                try Tarjeta(id: "12345-A").insert(db)
+                try Tarjeta(id: "12345-B").insert(db)
+                try Tarjeta(id: "12345-C").insert(db)
+                try Tarjeta(id: "12345-D").insert(db)
+            }
+            
             // 4. Write and read in the database
             try dbQueue.write { db in
-                try Alumno(id: "214", name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162").insert(db)
-                try Alumno(id: "2144", name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160").insert(db)
-                try Alumno(id: "2141", name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164").insert(db)
-                try Alumno(id: "2142", name: "Ximena", lastname1: "Martinez", lastname2: "Salinas", academicId: "3165").insert(db)
+                try Alumno(id: "214", name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162", idTarjeta: "12345-A").insert(db)
+                try Alumno(id: "2144", name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: "12345-B").insert(db)
+                try Alumno(id: "2141", name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: "12345-C").insert(db)
+                try Alumno(id: "2142", name: "Ximena", lastname1: "Martinez", lastname2: "Salinas", academicId: "3165", idTarjeta: "12345-D").insert(db)
             }
             
             try dbQueue.write { db in
@@ -114,6 +132,18 @@ struct Persistence {
         }
     }
     
+    func tarjetas() -> [Tarjeta] {
+        
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+        
+
+        let dbQueue = try! DatabaseQueue(path: path + "/db.sqlite")
+        
+        return try! dbQueue.read { db in
+            try Tarjeta.fetchAll(db)
+        }
+    }
+    
     func updateAlumno(withId id: String, record: Alumno) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
@@ -127,6 +157,7 @@ struct Persistence {
                     alumno.lastname1 = record.lastname1
                     alumno.lastname2 = record.lastname2
                     alumno.academicId = record.academicId
+                    alumno.idTarjeta = record.idTarjeta
                     // Ejecutar la actualización en la base de datos
                     try alumno.update(db)
                 } else {

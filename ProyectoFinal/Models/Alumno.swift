@@ -14,17 +14,16 @@ struct Alumno: Codable, Identifiable, FetchableRecord, PersistableRecord {
     var lastname1: String
     var lastname2: String
     var academicId: String
+    var idTarjeta: String
     
-    mutating func updateName(name: String) {
-        self.name = name
-    }
-    
+
     mutating func updateObject(object: Alumno) {
         self.id = object.id
         self.name = object.name
         self.lastname1 = object.lastname1
         self.lastname2 = object.lastname2
         self.academicId = object.academicId
+        self.idTarjeta = object.idTarjeta
     }
     
 }
