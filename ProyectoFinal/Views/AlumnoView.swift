@@ -1,5 +1,5 @@
 //
-//  RecordView.swift
+//  PersonView.swift
 //  ProyectoFinal
 //
 //  Created by Raul Salinas on 12/10/23.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct RecordView: View {
+struct AlumnoView: View {
     
     let typeEntity: String
     let idRecord: String
 
-    let record: Any
+    let record: Alumno?
     
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -26,81 +26,47 @@ struct RecordView: View {
     @State private var selectedIdTarjeta: Int = 0
     
     private func updateProperties() {
-            if let alumno = record as? Alumno {
-                id = alumno.id
-                name = alumno.name
-                lastname1 = alumno.lastname1
-                lastname2 = alumno.lastname2
-                academicId = alumno.academicId
-                
-                // Suponiendo que alumno es un objeto y viewModel.tarjetas es una colección de objetos
-                if let index = viewModel.tarjetas.firstIndex(where: { $0.id == alumno.idTarjeta }) {
-                    selectedIdTarjeta = index
-                    print(index)
-                } else {
-                    // Manejar el caso donde no se encuentra el idTarjeta en viewModel.tarjetas
-                    selectedIdTarjeta = 0
-                }
-
-
-
-
-            } else if let profesor = record as? Profesor {
-                id = profesor.id
-                name = profesor.name
-                lastname1 = profesor.lastname1
-                lastname2 = profesor.lastname2
-                academicId = profesor.academicId
-            }
+        guard let record = record else {
+            // Si record no existe, no actualizar nada
+            return
         }
+
+        id = record.id
+        name = record.name
+        lastname1 = record.lastname1
+        lastname2 = record.lastname2
+        academicId = record.academicId
+
+        if let index = viewModel.tarjetas.firstIndex(where: { $0.id == record.idTarjeta }) {
+            selectedIdTarjeta = index
+            print(index)
+        } else {
+            selectedIdTarjeta = 0
+        }
+    }
+
     
     func handleUpdate() {
-        switch typeEntity {
-        case "Alumnos":
-            let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
 
-                viewModel.updateAlumno(withId: idRecord, record: alumno)
-        case "Profesores":
-            let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
-            viewModel.updateProfesor(withId: idRecord, record: profesor)
+        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
 
-        default:
-            // Manejar otros casos si es necesario
-            print("El tipo de entidad no es válido")
-        }
-        
+        viewModel.updateAlumno(withId: idRecord, record: alumno)
+
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleDelete() {
-        switch typeEntity {
-        case "Alumnos":
-            viewModel.deleteAlumno(withId: idRecord)
-        case "Profesores":
-            viewModel.deleteProfesor(withId: idRecord)
-        default:
-            // Manejar otros casos si es necesario
-            print("El tipo de entidad no es válido")
-        }
-        
+        viewModel.deleteAlumno(withId: idRecord)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleCreate() {
         
-        switch typeEntity {
-        case "Alumnos":
-            let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: "hola")
+        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: "hola")
             viewModel.createAlumno(alumno: alumno)
-        case "Profesores":
-            let profesor = Profesor(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId)
-            viewModel.createProfesor(profesor: profesor)
-        default:
-            // Manejar otros casos si es necesario
-            print("El tipo de entidad no es válido")
-        }
+        
         self.presentationMode.wrappedValue.dismiss()
     }
     

@@ -11,7 +11,7 @@ struct HomeView: View {
     
     let menuItemsCrud: [MenuItem] = [
             MenuItem(name: "Alumnos"),
-            MenuItem(name: "Profesores"),
+            MenuItem(name: "Tarjetas"),
             MenuItem(name: "Grupos")
     ]
     

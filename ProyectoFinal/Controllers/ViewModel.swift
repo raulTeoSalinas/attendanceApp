@@ -11,7 +11,7 @@ import Foundation
 class ViewModel: ObservableObject {
     
     @Published var alumnos = [Alumno]()
-    @Published var profesores = [Profesor]()
+
     @Published var grupos = [Grupo]()
     @Published var tarjetas = [Tarjeta]()
     private let persistence: Persistence
@@ -19,7 +19,6 @@ class ViewModel: ObservableObject {
     init() {
         self.persistence = Persistence()
         self.alumnos = persistence.alumnos()
-        self.profesores = persistence.profesores()
         self.grupos = persistence.grupos()
         self.tarjetas = persistence.tarjetas()
     }
@@ -28,12 +27,6 @@ class ViewModel: ObservableObject {
         persistence.updateAlumno(withId: id, record: record)
         // Actualizar la lista de alumnos después de la modificación en la base de datos
         self.alumnos = persistence.alumnos()
-    }
-    
-    func updateProfesor(withId id: String, record: Profesor) {
-        persistence.updateProfesor(withId: id, record: record)
-        // Actualizar la lista de profesores después de la modificación en la base de datos
-        self.profesores = persistence.profesores()
     }
     
     func updateGrupo(withId id: String, record: Grupo) {
@@ -47,11 +40,6 @@ class ViewModel: ObservableObject {
         self.alumnos = persistence.alumnos()
     }
     
-    func deleteProfesor(withId id: String){
-        persistence.deleteProfesor(withId: id)
-        self.profesores = persistence.profesores()
-    }
-    
     func deleteGrupo(withId id: String){
         persistence.deleteGrupo(withId: id)
         self.grupos = persistence.grupos()
@@ -60,11 +48,6 @@ class ViewModel: ObservableObject {
     func createAlumno(alumno: Alumno){
         persistence.createAlumno(alumno: alumno)
         self.alumnos = persistence.alumnos()
-    }
-    
-    func createProfesor(profesor: Profesor){
-        persistence.createProfesor(profesor: profesor)
-        self.profesores = persistence.profesores()
     }
     
     func createGrupo(grupo: Grupo){

@@ -19,18 +19,19 @@ struct EntityList: View {
                 switch typeEntity {
                 case "Alumnos":
                     ForEach(viewModel.alumnos) { alumno in
-                        NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: alumno.id, record: alumno)) {
+                        NavigationLink(destination: AlumnoView(typeEntity: typeEntity, idRecord: alumno.id, record: alumno)) {
                                Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                            }
                        }
-                case "Profesores":
-                    ForEach(viewModel.profesores) { profesor in
-                        NavigationLink(destination: RecordView(typeEntity: typeEntity, idRecord: profesor.id, record: profesor)) {
-                            Text("\(profesor.name) \(profesor.lastname1) \(profesor.lastname2)")
-                        }
-                    }
                 case "Grupos":
                     ForEach(viewModel.grupos) { grupo in
+                        NavigationLink(destination: GrupoView(idRecord: grupo.id, record: grupo)) {
+                            Text("\(grupo.id) (\(grupo.materia))")
+                        }
+                        
+                    }
+                case "Tarjetas":
+                    ForEach(viewModel.tarjetas) { tarjeta in
                         NavigationLink(destination: GrupoView(idRecord: grupo.id, record: grupo)) {
                             Text("\(grupo.id) (\(grupo.materia))")
                         }
@@ -44,7 +45,7 @@ struct EntityList: View {
                 trailing: NavigationLink(destination:
                     typeEntity == "Grupos" ?
                         AnyView(GrupoView(idRecord: "", record: nil)) :
-                        AnyView(RecordView(typeEntity: typeEntity, idRecord: "", record: {}))
+                        AnyView(AlumnoView(typeEntity: typeEntity, idRecord: "", record: nil))
                 ) {
                     Text("Crear")
                 }

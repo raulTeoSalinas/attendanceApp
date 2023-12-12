@@ -54,14 +54,11 @@ struct GrupoView: View {
     
     
     var body: some View {
-        VStack() {
+        Form {
             
             if idRecord.isEmpty{
                 HStack{
                 Text("ID:")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .padding(.leading)
                 TextField("Ingrese id", text: $id)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
@@ -69,18 +66,12 @@ struct GrupoView: View {
             
             HStack{
                 Text("Materia:")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .padding(.leading)
                 TextField("Ingrese materia", text: $materia)
 
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             HStack{
                 Text("Carrera:")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .padding(.leading)
                 TextField("Ingrese carrera", text: $carrera)
 
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -95,8 +86,7 @@ struct GrupoView: View {
             }
             
             
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-            .padding()
+        }
             .onAppear {
                 updateProperties()
             }
