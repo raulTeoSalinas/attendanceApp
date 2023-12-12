@@ -14,6 +14,8 @@ class ViewModel: ObservableObject {
 
     @Published var grupos = [Grupo]()
     @Published var tarjetas = [Tarjeta]()
+    @Published var alumnosGrupos = [AlumnoGrupo]()
+    
     private let persistence: Persistence
     
     init() {
@@ -21,6 +23,7 @@ class ViewModel: ObservableObject {
         self.alumnos = persistence.alumnos()
         self.grupos = persistence.grupos()
         self.tarjetas = persistence.tarjetas()
+        self.alumnosGrupos = persistence.alumnosGrupos()
     }
     
     func updateAlumno(withId id: String, record: Alumno) {

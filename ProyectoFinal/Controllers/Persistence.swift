@@ -49,6 +49,17 @@ struct Persistence {
             }
             
             try dbQueue.write { db in
+                try db.create(table: "alumnoGrupo") { t in
+                    t.column("id", .integer).primaryKey(autoincrement: true)
+                    t.column("idAlumno", .text).notNull()
+                    t.column("idGrupo", .text).notNull()
+                    
+                    t.foreignKey(["idAlumno"], references: "alumno", onDelete: .cascade)
+                    t.foreignKey(["idGrupo"], references: "grupo", onDelete: .cascade)
+                }
+            }
+            
+            try dbQueue.write { db in
                 try Tarjeta(id: "12345-A").insert(db)
                 try Tarjeta(id: "12345-B").insert(db)
                 try Tarjeta(id: "12345-C").insert(db)
@@ -57,19 +68,33 @@ struct Persistence {
             
             // 4. Write and read in the database
             try dbQueue.write { db in
-                try Alumno(id: "214", name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162", idTarjeta: "12345-A").insert(db)
-                try Alumno(id: "2144", name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: "12345-B").insert(db)
-                try Alumno(id: "2141", name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: "12345-C").insert(db)
-                try Alumno(id: "2142", name: "Ximena", lastname1: "Martinez", lastname2: "Salinas", academicId: "3165", idTarjeta: "12345-D").insert(db)
+                try Alumno(id: "23456-A", name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162", idTarjeta: "12345-A").insert(db)
+                try Alumno(id: "23456-B", name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: "12345-B").insert(db)
+                try Alumno(id: "23456-C", name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: "12345-C").insert(db)
+                try Alumno(id: "23456-D", name: "Ximena", lastname1: "Martinez", lastname2: "Salinas", academicId: "3165", idTarjeta: "12345-D").insert(db)
             }
             
             
             try dbQueue.write { db in
-                try Grupo(id: "124124", materia: "Programacion", carrera: "Informatica").insert(db)
-                try Grupo(id: "124125", materia: "Contaduria", carrera: "Contaduria").insert(db)
-                try Grupo(id: "124126", materia: "Recursos Humanos", carrera: "Administracion").insert(db)
-                try Grupo(id: "124127", materia: "Sistemas operativos", carrera: "Informatica").insert(db)
+                try Grupo(id: "34567-A", materia: "Programacion", carrera: "Informatica").insert(db)
+                try Grupo(id: "34567-B", materia: "Contaduria", carrera: "Contaduria").insert(db)
+                try Grupo(id: "34567-C", materia: "Recursos Humanos", carrera: "Administracion").insert(db)
+                try Grupo(id: "34567-D", materia: "Sistemas operativos", carrera: "Informatica").insert(db)
             }
+            
+            try dbQueue.write { db in
+                
+                try AlumnoGrupo(idAlumno: "23456-A", idGrupo: "34567-A").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-A", idGrupo: "34567-C").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-B", idGrupo: "34567-B").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-B", idGrupo: "34567-C").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-C", idGrupo: "34567-A").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-C", idGrupo: "34567-D").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-D", idGrupo: "34567-A").insert(db)
+                try AlumnoGrupo(idAlumno: "23456-D", idGrupo: "34567-B").insert(db)
+                
+            }
+            
             
             
             
@@ -113,6 +138,18 @@ struct Persistence {
         
         return try! dbQueue.read { db in
             try Tarjeta.fetchAll(db)
+        }
+    }
+    
+    func alumnosGrupos() -> [AlumnoGrupo] {
+        
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+        
+
+        let dbQueue = try! DatabaseQueue(path: path + "/db.sqlite")
+        
+        return try! dbQueue.read { db in
+            try AlumnoGrupo.fetchAll(db)
         }
     }
     

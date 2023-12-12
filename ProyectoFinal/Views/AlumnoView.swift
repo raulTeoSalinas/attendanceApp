@@ -24,27 +24,46 @@ struct AlumnoView: View {
     
     @State private var selectedIdTarjeta: Int = 0
     
+    @State private var numberOfGrupos: Int = 0
+    @State private var indexSelectedGrupos: [Int] = []
+
+    
     private func updateProperties() {
         guard let record = record else {
             // Si record no existe, no actualizar nada
             return
         }
-
+        
         id = record.id
         name = record.name
         lastname1 = record.lastname1
         lastname2 = record.lastname2
         academicId = record.academicId
-
+        
         if let index = viewModel.tarjetas.firstIndex(where: { $0.id == record.idTarjeta }) {
             selectedIdTarjeta = index
-            print(index)
         } else {
             selectedIdTarjeta = 0
         }
-    }
+        
+        for i in 0..<viewModel.alumnosGrupos.count {
+            if viewModel.alumnosGrupos[i].idAlumno == record.id {
+                numberOfGrupos += 1
+                
+                // Bucle anidado para buscar coincidencias con grupos
+                for j in 0..<viewModel.grupos.count {
+                    if viewModel.alumnosGrupos[i].idGrupo == viewModel.grupos[j].id {
+                        // Almacena la posición del grupo en indexSelectedGrupos
+                        indexSelectedGrupos.append(j)
 
-    
+                    }
+                }
+            }
+            print(indexSelectedGrupos)
+            
+        }
+        
+    }
     func handleUpdate() {
 
         let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
@@ -76,7 +95,7 @@ struct AlumnoView: View {
     
     var body: some View {
       
-        Form{
+        List{
             Section(header: Text("Información Personal")) {
                 if idRecord.isEmpty {
                     HStack{
@@ -139,15 +158,21 @@ struct AlumnoView: View {
                 }
                 
             }
-            Section(header: Text("Materias")) {
-                HStack{
-                    Text("Nombre:")
-                    
-                    TextField("Ingrese nombre", text: $name)
-                    
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            Section(header: Text("Grupos")) {
+                
+                
+                ForEach(indexSelectedGrupos.indices, id: \.self) { i in
+                    Picker("", selection: $indexSelectedGrupos[i]) {
+                        ForEach(viewModel.grupos.indices, id: \.self) { sGIndex in
+                            Text(viewModel.grupos[sGIndex].materia).tag(sGIndex)
+                        }
+                    }
                 }
+
+                
             }
+        
             
         }
             

@@ -26,7 +26,7 @@
 		955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5DA2B2701F5006B7A66 /* GrupoView.swift */; };
 		95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20212B28289E00BFA2AB /* Tarjeta.swift */; };
 		95AF20242B2844D700BFA2AB /* TarjetaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20232B2844D700BFA2AB /* TarjetaView.swift */; };
-		95AF20262B28558400BFA2AB /* AlumnoMateria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20252B28558400BFA2AB /* AlumnoMateria.swift */; };
+		95AF20282B2855ED00BFA2AB /* AlumnoGrupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,7 @@
 		955BB5DA2B2701F5006B7A66 /* GrupoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoView.swift; sourceTree = "<group>"; };
 		95AF20212B28289E00BFA2AB /* Tarjeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tarjeta.swift; sourceTree = "<group>"; };
 		95AF20232B2844D700BFA2AB /* TarjetaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarjetaView.swift; sourceTree = "<group>"; };
-		95AF20252B28558400BFA2AB /* AlumnoMateria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoMateria.swift; sourceTree = "<group>"; };
+		95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoGrupo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,7 +186,7 @@
 				955BB5C62B268F46006B7A66 /* Alumno.swift */,
 				955BB5D62B26FCF6006B7A66 /* Grupo.swift */,
 				95AF20212B28289E00BFA2AB /* Tarjeta.swift */,
-				95AF20252B28558400BFA2AB /* AlumnoMateria.swift */,
+				95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -336,11 +336,11 @@
 				955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */,
 				955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */,
 				955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */,
-				95AF20262B28558400BFA2AB /* AlumnoMateria.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
 				95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */,
 				955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */,
 				955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */,
+				95AF20282B2855ED00BFA2AB /* AlumnoGrupo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
