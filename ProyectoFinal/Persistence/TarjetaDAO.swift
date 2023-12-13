@@ -27,9 +27,9 @@ class TarjetaDAO {
         }
     }
     
-    func deleteTarjeta(withId id: String) throws {
-        try persistence.dbQueue.write { db in
-            guard var tarjeta = try Tarjeta.fetchOne(db, key: id) else { return }
+    
+    func deleteTarjeta(tarjeta: Tarjeta) throws {
+        _ = try persistence.dbQueue.write { db in
             try tarjeta.delete(db)
         }
     }

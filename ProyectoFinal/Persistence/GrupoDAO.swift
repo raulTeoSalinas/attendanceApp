@@ -36,7 +36,7 @@ class GrupoDAO {
     }
     
     func deleteGrupo(record: Grupo) throws {
-        try persistence.dbQueue.write { db in
+        _ = try persistence.dbQueue.write { db in
             try record.delete(db)
         }
     }

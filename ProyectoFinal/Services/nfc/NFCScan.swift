@@ -16,6 +16,7 @@ class NFCImpl: NFCScan {
     
     func read() -> String {
         // TODO: NFC implementation
-        return "123456789"
+        let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            return String((0..<10).map { _ in characters.randomElement()! })
     }
 }

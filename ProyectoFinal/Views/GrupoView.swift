@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GrupoView: View {
     
-    let record: Grupo?
+    let grupo: Grupo?
     
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -18,14 +18,17 @@ struct GrupoView: View {
     @State private var carrera: String = ""
     
     private func updateProperties() {
-        if let record = record {
-            materia = record.materia
-            carrera = record.carrera
+        if let grupo = grupo {
+            materia = grupo.materia
+            carrera = grupo.carrera
         }
     }
     
     func handleUpdate() {
-        let grupo = Grupo(materia: materia, carrera: carrera)
+        
+        guard var grupo = grupo else { return }
+        
+        grupo = Grupo(id: grupo.id, materia: materia, carrera: carrera)
         
         viewModel.updateGrupo(record: grupo)
         // Después de la actualización, navegar hacia atrás
@@ -33,7 +36,7 @@ struct GrupoView: View {
     }
     
     func handleDelete() {
-        guard let grupo = record else { return }
+        guard let grupo = grupo else { return }
         viewModel.deleteGrupo(grupo: grupo)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
@@ -63,7 +66,7 @@ struct GrupoView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             
-            if record != nil {
+            if grupo != nil {
                 Button(action: {
                     handleDelete()
                 }) {
@@ -78,7 +81,7 @@ struct GrupoView: View {
         }
         .navigationBarItems(
             trailing: {
-                if record == nil {
+                if grupo == nil {
                     Button(action: {
                         handleCreate()
                     }) {

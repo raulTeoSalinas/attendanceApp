@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TarjetaView: View {
     
-    let idRecord: String
-    let record: Tarjeta?
+
+    let tarjeta: Tarjeta?
     
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -18,17 +18,19 @@ struct TarjetaView: View {
     @State private var tarjetaId: String = ""
     
     private func updateProperties() {
-        if let record = record {
-            tarjetaId = record.id
+        if let tarjeta = tarjeta {
+            tarjetaId = tarjeta.id
         }
     }
     
+
     func handleDelete() {
-        
-        viewModel.deleteTarjeta(withId: idRecord)
+        guard let tarjeta = tarjeta else { return }
+        viewModel.deleteTarjeta(tarjeta: tarjeta)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
+    
     
     func handleCreate() {
         let tarjeta = Tarjeta(id: tarjetaId)
@@ -38,7 +40,7 @@ struct TarjetaView: View {
     
     var body: some View {
         Form {
-            if idRecord.isEmpty{
+            if tarjeta == nil{
                 HStack{
                     Text("Id:")
                     TextField("Ingrese tarjeta", text: $tarjetaId)
@@ -52,7 +54,7 @@ struct TarjetaView: View {
             } else {
                 HStack{
                     Text("Id:")
-                    Text(idRecord)
+                    Text(tarjeta?.id ?? "")
                 }
                 Button(action: {
                     handleDelete()
@@ -67,7 +69,7 @@ struct TarjetaView: View {
         .navigationBarItems(
             trailing: {
                 Group {
-                    if idRecord.isEmpty {
+                    if tarjeta == nil {
                         Button(action: {
                             handleCreate()
                         }) {

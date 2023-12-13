@@ -23,14 +23,14 @@ struct EntityList: View {
                        }
                 case "Grupos":
                     ForEach(viewModel.grupos) { grupo in
-                        NavigationLink(destination: GrupoView(record: grupo)) {
-                            Text("\(grupo.materia))")
+                        NavigationLink(destination: GrupoView(grupo: grupo)) {
+                            Text("\(grupo.materia)")
                         }
                         
                     }
                 case "Tarjetas":
                     ForEach(viewModel.tarjetas) { tarjeta in
-                        NavigationLink(destination: TarjetaView( idRecord: tarjeta.id, record: tarjeta)) {
+                        NavigationLink(destination: TarjetaView( tarjeta: tarjeta)) {
                             Text("\(tarjeta.id)")
                         }
                         
@@ -42,10 +42,10 @@ struct EntityList: View {
             .navigationBarItems(
                 trailing: NavigationLink(destination:
                     typeEntity == "Grupos" ?
-                    AnyView(GrupoView(record: nil)) :
+                    AnyView(GrupoView(grupo: nil)) :
                     typeEntity == "Alumnos" ?
                     AnyView(AlumnoView(alumno: nil)) :
-                    AnyView(TarjetaView(idRecord: "", record: nil))
+                    AnyView(TarjetaView(tarjeta: nil))
                 ) {
                     Text("Crear")
                 }

@@ -54,11 +54,12 @@ extension PersistenceImpl {
         }
         
         let gruposId = try dbQueue.read { db in try Grupo.fetchAll(db) }.compactMap { $0.id}
+        let tarjetasId = try dbQueue.read { db in try Tarjeta.fetchAll(db) }.compactMap { $0.id}
         
         try dbQueue.write { db in
-            try Alumno(name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162", idTarjeta: "12345-A", idGrupo: gruposId[0]).insert(db)
-            try Alumno(name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: "12345-B", idGrupo: gruposId[1] ).insert(db)
-            try Alumno(name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: "12345-C", idGrupo: gruposId[2]).insert(db)
+            try Alumno(name: "Arthur", lastname1: "Blade", lastname2: "Smith", academicId: "3162", idTarjeta: tarjetasId[0], idGrupo: gruposId[0]).insert(db)
+            try Alumno(name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: tarjetasId[1], idGrupo: gruposId[1] ).insert(db)
+            try Alumno(name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: tarjetasId[2], idGrupo: gruposId[2]).insert(db)
         }
     }
     

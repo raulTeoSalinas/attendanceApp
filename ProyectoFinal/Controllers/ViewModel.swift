@@ -56,9 +56,9 @@ class ViewModel: ObservableObject {
         } catch { }
     }
     
-    func deleteTarjeta(withId id: String){
+    func deleteTarjeta(tarjeta: Tarjeta){
         do {
-            try tarjetaDAO.deleteTarjeta(withId: id)
+            try tarjetaDAO.deleteTarjeta(tarjeta: tarjeta)
             tarjetas = try tarjetaDAO.getTarjetas()
         } catch { }
     }

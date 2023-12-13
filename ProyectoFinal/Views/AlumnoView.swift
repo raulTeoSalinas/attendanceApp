@@ -16,7 +16,9 @@ struct AlumnoView: View {
     @State private var lastname1: String = ""
     @State private var lastname2: String = ""
     @State private var academicId: String = ""
-    @State private var selectedIdTarjeta: Int = 0
+    @State private var selectedIdGrupo: Int = 0
+    @State private var idTarjeta: String = ""
+    
     @State private var idsFromAlumnoGrupo: [Int64] = []
     @State private var indexSelectedGrupos: [Int] = []
     
@@ -32,22 +34,28 @@ struct AlumnoView: View {
         lastname1 = record.lastname1
         lastname2 = record.lastname2
         academicId = record.academicId
+        idTarjeta = record.idTarjeta
         
-        if let index = viewModel.tarjetas.firstIndex(where: { $0.id == record.idTarjeta }) {
-            selectedIdTarjeta = index
+        if let index = viewModel.grupos.firstIndex(where: { $0.id == record.idGrupo }) {
+            selectedIdGrupo = index
         } else {
-            selectedIdTarjeta = 0
+            selectedIdGrupo = 0
         }
     }
     func handleUpdate() {
         
-        let alumno = Alumno(
+        guard var alumno = alumno else { return }
+
+        alumno = Alumno(
+            id: alumno.id,
             name: name,
             lastname1: lastname1,
             lastname2: lastname2,
             academicId: academicId,
-            idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id
+            idTarjeta: idTarjeta,
+            idGrupo: viewModel.grupos[selectedIdGrupo].id
         )
+
         
         viewModel.updateAlumno(record: alumno)
         
@@ -69,7 +77,8 @@ struct AlumnoView: View {
             lastname1: lastname1,
             lastname2: lastname2,
             academicId: academicId,
-            idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id
+            idTarjeta: idTarjeta,
+            idGrupo: viewModel.grupos[selectedIdGrupo].id
         )
         
         viewModel.createAlumno(alumno: alumno)
@@ -122,10 +131,24 @@ struct AlumnoView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 
+                HStack{
+                    Text("Id:")
+                    TextField("Ingrese tarjeta", text: $idTarjeta)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button(action: {
+                        
+                        idTarjeta = viewModel.handleScan()
+                        let tarjeta = Tarjeta(id: idTarjeta)
+                        viewModel.createTarjeta(tarjeta: tarjeta)
+                        
+                    }) {
+                        Text("Scanear")
+                    }
+                }
                 
-                Picker("Tarjeta", selection: $selectedIdTarjeta) {
-                    ForEach(Array(viewModel.tarjetas.enumerated()), id: \.1.id) { index, tarjeta in
-                        Text(tarjeta.id)
+                Picker("Grupo", selection: $selectedIdGrupo) {
+                    ForEach(Array(viewModel.grupos.enumerated()), id: \.1.id) { index, grupo in
+                        Text(grupo.materia)
                             .tag(index) // Asigna un valor único (índice) como tag
                     }
                 }
@@ -139,11 +162,7 @@ struct AlumnoView: View {
                 }
                 
             }
-            Text("Grupo")
-            if let grupo = viewModel.getGrupoFromAlumno(idGrupo: alumno?.idGrupo) {
-                Text("Materia \(grupo.materia))")
-                Text("Grupo \(grupo.carrera))")
-            }
+
         }
         
         
