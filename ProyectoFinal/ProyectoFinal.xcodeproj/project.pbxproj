@@ -16,7 +16,7 @@
 		955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955160D52B2786F1008D2DFF /* AsistenciaView.swift */; };
 		955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5B72B267699006B7A66 /* MenuItem.swift */; };
 		955BB5C12B268C57006B7A66 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 955BB5C02B268C57006B7A66 /* GRDB */; };
-		955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C22B268D6B006B7A66 /* Persistence.swift */; };
+		955BB5C32B268D6B006B7A66 /* PersistenceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C22B268D6B006B7A66 /* PersistenceImpl.swift */; };
 		955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C62B268F46006B7A66 /* Alumno.swift */; };
 		955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CC2B269B27006B7A66 /* HomeView.swift */; };
 		955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CE2B269D17006B7A66 /* EntityList.swift */; };
@@ -26,7 +26,15 @@
 		955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5DA2B2701F5006B7A66 /* GrupoView.swift */; };
 		95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20212B28289E00BFA2AB /* Tarjeta.swift */; };
 		95AF20242B2844D700BFA2AB /* TarjetaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20232B2844D700BFA2AB /* TarjetaView.swift */; };
-		95AF20282B2855ED00BFA2AB /* AlumnoGrupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */; };
+		D326F97A2B2944700036A943 /* Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F9792B2944700036A943 /* Migrations.swift */; };
+		D326F97D2B2947B90036A943 /* AlumnoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F97C2B2947B90036A943 /* AlumnoDAO.swift */; };
+		D326F97F2B29489F0036A943 /* GrupoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F97E2B29489F0036A943 /* GrupoDAO.swift */; };
+		D326F9812B2948CF0036A943 /* TarjetaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F9802B2948CF0036A943 /* TarjetaDAO.swift */; };
+		D326F9862B294F1F0036A943 /* ServiceMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F9852B294F1F0036A943 /* ServiceMain.swift */; };
+		D326F9892B2950220036A943 /* ServiceViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F9882B2950220036A943 /* ServiceViewModels.swift */; };
+		D326F98B2B29506A0036A943 /* ServicePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F98A2B29506A0036A943 /* ServicePersistence.swift */; };
+		D3C21E042B29753E004D9016 /* ServiceNFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C21E032B29753E004D9016 /* ServiceNFC.swift */; };
+		D3C21E062B297556004D9016 /* NFCScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C21E052B297556004D9016 /* NFCScan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +67,7 @@
 		954808AC2B230B420073A275 /* ProyectoFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProyectoFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		955160D52B2786F1008D2DFF /* AsistenciaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistenciaView.swift; sourceTree = "<group>"; };
 		955BB5B72B267699006B7A66 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		955BB5C22B268D6B006B7A66 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		955BB5C22B268D6B006B7A66 /* PersistenceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceImpl.swift; sourceTree = "<group>"; };
 		955BB5C62B268F46006B7A66 /* Alumno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alumno.swift; sourceTree = "<group>"; };
 		955BB5CC2B269B27006B7A66 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		955BB5CE2B269D17006B7A66 /* EntityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityList.swift; sourceTree = "<group>"; };
@@ -69,7 +77,15 @@
 		955BB5DA2B2701F5006B7A66 /* GrupoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoView.swift; sourceTree = "<group>"; };
 		95AF20212B28289E00BFA2AB /* Tarjeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tarjeta.swift; sourceTree = "<group>"; };
 		95AF20232B2844D700BFA2AB /* TarjetaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarjetaView.swift; sourceTree = "<group>"; };
-		95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoGrupo.swift; sourceTree = "<group>"; };
+		D326F9792B2944700036A943 /* Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrations.swift; sourceTree = "<group>"; };
+		D326F97C2B2947B90036A943 /* AlumnoDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoDAO.swift; sourceTree = "<group>"; };
+		D326F97E2B29489F0036A943 /* GrupoDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoDAO.swift; sourceTree = "<group>"; };
+		D326F9802B2948CF0036A943 /* TarjetaDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarjetaDAO.swift; sourceTree = "<group>"; };
+		D326F9852B294F1F0036A943 /* ServiceMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMain.swift; sourceTree = "<group>"; };
+		D326F9882B2950220036A943 /* ServiceViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModels.swift; sourceTree = "<group>"; };
+		D326F98A2B29506A0036A943 /* ServicePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePersistence.swift; sourceTree = "<group>"; };
+		D3C21E032B29753E004D9016 /* ServiceNFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNFC.swift; sourceTree = "<group>"; };
+		D3C21E052B297556004D9016 /* NFCScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCScan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +117,8 @@
 		954808822B230B410073A275 = {
 			isa = PBXGroup;
 			children = (
-				954808BB2B230C3D0073A275 /* Models */,
+				D326F9842B294F0E0036A943 /* Services */,
+				D326F97B2B2945330036A943 /* Persistence */,
 				954808BA2B230C300073A275 /* Views */,
 				954808B92B230C1A0073A275 /* Controllers */,
 				9548088D2B230B410073A275 /* ProyectoFinal */,
@@ -160,7 +177,6 @@
 		954808B92B230C1A0073A275 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				955BB5C22B268D6B006B7A66 /* Persistence.swift */,
 				955BB5D02B26A6CF006B7A66 /* ViewModel.swift */,
 			);
 			path = Controllers;
@@ -186,9 +202,41 @@
 				955BB5C62B268F46006B7A66 /* Alumno.swift */,
 				955BB5D62B26FCF6006B7A66 /* Grupo.swift */,
 				95AF20212B28289E00BFA2AB /* Tarjeta.swift */,
-				95AF20272B2855ED00BFA2AB /* AlumnoGrupo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D326F97B2B2945330036A943 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				954808BB2B230C3D0073A275 /* Models */,
+				D326F9792B2944700036A943 /* Migrations.swift */,
+				955BB5C22B268D6B006B7A66 /* PersistenceImpl.swift */,
+				D326F97C2B2947B90036A943 /* AlumnoDAO.swift */,
+				D326F97E2B29489F0036A943 /* GrupoDAO.swift */,
+				D326F9802B2948CF0036A943 /* TarjetaDAO.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		D326F9842B294F0E0036A943 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3C21E022B297533004D9016 /* nfc */,
+				D326F9852B294F1F0036A943 /* ServiceMain.swift */,
+				D326F9882B2950220036A943 /* ServiceViewModels.swift */,
+				D326F98A2B29506A0036A943 /* ServicePersistence.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D3C21E022B297533004D9016 /* nfc */ = {
+			isa = PBXGroup;
+			children = (
+				D3C21E032B29753E004D9016 /* ServiceNFC.swift */,
+				D3C21E052B297556004D9016 /* NFCScan.swift */,
+			);
+			path = nfc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,18 +377,26 @@
 			files = (
 				955BB5D12B26A6CF006B7A66 /* ViewModel.swift in Sources */,
 				95AF20242B2844D700BFA2AB /* TarjetaView.swift in Sources */,
+				D3C21E062B297556004D9016 /* NFCScan.swift in Sources */,
+				D326F9812B2948CF0036A943 /* TarjetaDAO.swift in Sources */,
 				955BB5D32B26AB21006B7A66 /* AlumnoView.swift in Sources */,
 				955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */,
 				955BB5B82B267699006B7A66 /* MenuItem.swift in Sources */,
+				D326F9862B294F1F0036A943 /* ServiceMain.swift in Sources */,
 				955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */,
 				955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */,
-				955BB5C32B268D6B006B7A66 /* Persistence.swift in Sources */,
+				D326F98B2B29506A0036A943 /* ServicePersistence.swift in Sources */,
+				955BB5C32B268D6B006B7A66 /* PersistenceImpl.swift in Sources */,
+				D326F9892B2950220036A943 /* ServiceViewModels.swift in Sources */,
+				D3C21E042B29753E004D9016 /* ServiceNFC.swift in Sources */,
+				D326F97A2B2944700036A943 /* Migrations.swift in Sources */,
+				D326F97F2B29489F0036A943 /* GrupoDAO.swift in Sources */,
 				955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */,
+				D326F97D2B2947B90036A943 /* AlumnoDAO.swift in Sources */,
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
 				95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */,
 				955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */,
 				955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */,
-				95AF20282B2855ED00BFA2AB /* AlumnoGrupo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,10 +576,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lesnoy.ProyectoFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -556,10 +613,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lesnoy.ProyectoFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

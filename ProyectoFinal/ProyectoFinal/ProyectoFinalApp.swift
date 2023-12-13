@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct ProyectoFinalApp: App {
-    let viewModel = ViewModel()
+    
+    let main = ServiceMain()
     
     var body: some Scene {
         WindowGroup {
-            let _ = Persistence()
-            HomeView().environmentObject(viewModel)
+            HomeView().environmentObject(main.serviceVm.viewModel)
         }
     }
 }

@@ -11,73 +11,92 @@ import GRDB
 class ViewModel: ObservableObject {
     
     @Published var alumnos = [Alumno]()
-
     @Published var grupos = [Grupo]()
     @Published var tarjetas = [Tarjeta]()
-    @Published var alumnosGrupos = [AlumnoGrupo]()
-
     
-    private let persistence: Persistence
+    private let alumnosDAO: AlumnoDAO
+    private let grupoDAO: GrupoDAO
+    private let tarjetaDAO: TarjetaDAO
+    private let serviceNFC: ServiceNFC
     
-    init() {
-        self.persistence = Persistence()
-        self.alumnos = persistence.alumnos()
-        self.grupos = persistence.grupos()
-        self.tarjetas = persistence.tarjetas()
-        self.alumnosGrupos = persistence.alumnosGrupos()
+    init(
+        alumnosDAO: AlumnoDAO,
+        grupoDAO: GrupoDAO,
+        tarjetaDAO: TarjetaDAO
+    ) {
+        self.alumnosDAO = alumnosDAO
+        self.grupoDAO = grupoDAO
+        self.tarjetaDAO = tarjetaDAO
+        
+        
+        alumnos = try! alumnosDAO.getAlumnos()
+        grupos = try! grupoDAO.getGrupos()
+        tarjetas = try! tarjetaDAO.getTarjetas()
+        serviceNFC = ServiceNFC()
     }
     
-    
-    func updateAlumno(withId id: String, record: Alumno) {
-        persistence.updateAlumno(withId: id, record: record)
-        // Actualizar la lista de alumnos después de la modificación en la base de datos
-        self.alumnos = persistence.alumnos()
+    func updateAlumno(record: Alumno) {
+        do {
+            try alumnosDAO.updateAlumno(record: record)
+            alumnos = try alumnosDAO.getAlumnos()
+        } catch { }
     }
     
-    func updateGrupo(withId id: String, record: Grupo) {
-        persistence.updateGrupo(withId: id, record: record)
-        // Actualizar la lista de grupos después de la modificación en la base de datos
-        self.grupos = persistence.grupos()
+    func updateGrupo(record: Grupo) {
+        do {
+            try grupoDAO.updateGrupo(record: record)
+            grupos = try grupoDAO.getGrupos()
+        } catch { }
     }
     
-    func deleteAlumno(withId id: String){
-        persistence.deleteAlumno(withId: id)
-        self.alumnos = persistence.alumnos()
+    func deleteAlumno(alumno: Alumno){
+        do {
+            try alumnosDAO.deleteAlumno(alumno: alumno)
+            alumnos = try alumnosDAO.getAlumnos()
+        } catch { }
     }
     
     func deleteTarjeta(withId id: String){
-        persistence.deleteTarjeta(withId: id)
-        self.tarjetas = persistence.tarjetas()
+        do {
+            try tarjetaDAO.deleteTarjeta(withId: id)
+            tarjetas = try tarjetaDAO.getTarjetas()
+        } catch { }
     }
     
-    func deleteGrupo(withId id: String){
-        persistence.deleteGrupo(withId: id)
-        self.grupos = persistence.grupos()
+    func deleteGrupo(grupo: Grupo){
+        do {
+            try grupoDAO.deleteGrupo(record: grupo)
+            grupos = try grupoDAO.getGrupos()
+        } catch { }
     }
     
     func createAlumno(alumno: Alumno){
-        persistence.createAlumno(alumno: alumno)
-        self.alumnos = persistence.alumnos()
+        do {
+            try alumnosDAO.createAlumno(alumno: alumno)
+            alumnos = try alumnosDAO.getAlumnos()
+        } catch { }
     }
     
     func createGrupo(grupo: Grupo){
-        persistence.createGrupo(grupo: grupo)
-        self.grupos = persistence.grupos()
-    }
-    
-    func deleteCreateAlumnoGrupo(withIds ids: [Int64], alumnosGrupos: [AlumnoGrupo]) {
-        // Verificar si el arreglo 'ids' no está vacío antes de borrar
-        if !ids.isEmpty {
-            persistence.deleteAlumnoGrupos(withIds: ids)
-        }
-        
-        persistence.createAlumnoGrupos(alumnosGrupos: alumnosGrupos)
-        
-        self.alumnosGrupos = persistence.alumnosGrupos()
+        do {
+            try grupoDAO.createGrupo(grupo: grupo)
+            grupos = try grupoDAO.getGrupos()
+        } catch { }
     }
 
     func createTarjeta(tarjeta: Tarjeta){
-        persistence.createTarjeta(tarjeta: tarjeta)
-        self.tarjetas = persistence.tarjetas()
+        do {
+            try tarjetaDAO.createTarjeta(tarjeta: tarjeta)
+            tarjetas = try tarjetaDAO.getTarjetas()
+        } catch { }
+    }
+    
+    func getGrupoFromAlumno(idGrupo: Int64?) -> Grupo? {
+        guard idGrupo != nil else { return nil }
+        return grupos.filter { $0.id == idGrupo }.first
+    }
+    
+    func handleScan() -> String {
+        return serviceNFC.read()
     }
 }

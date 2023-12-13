@@ -15,11 +15,11 @@ struct TarjetaView: View {
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var id: String = ""
+    @State private var tarjetaId: String = ""
     
     private func updateProperties() {
         if let record = record {
-            id = record.id
+            tarjetaId = record.id
         }
     }
     
@@ -31,27 +31,20 @@ struct TarjetaView: View {
     }
     
     func handleCreate() {
-        
-        let tarjeta = Tarjeta(id: id)
+        let tarjeta = Tarjeta(id: tarjetaId)
         viewModel.createTarjeta(tarjeta: tarjeta)
         self.presentationMode.wrappedValue.dismiss()
     }
     
-    func handleScan() {
-        let randomString = String((0..<10).map { _ in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()! })
-        id = randomString
-    }
-    
     var body: some View {
         Form {
-            
             if idRecord.isEmpty{
                 HStack{
                     Text("Id:")
-                    TextField("Ingrese tarjeta", text: $id)
+                    TextField("Ingrese tarjeta", text: $tarjetaId)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
-                        handleScan()
+                        tarjetaId = viewModel.handleScan()
                     }) {
                         Text("Scanear")
                     }
@@ -67,8 +60,6 @@ struct TarjetaView: View {
                     Text("Borrar")
                 }
             }
-            
-            
         }
         .onAppear {
             updateProperties()
@@ -88,14 +79,5 @@ struct TarjetaView: View {
                 }
             }()
         )
-
-    
-        
     }
 }
-
-
-
-//#Preview {
-//    TarjetaView()
-//}

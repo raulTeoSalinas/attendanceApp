@@ -9,33 +9,25 @@ import SwiftUI
 
 struct AlumnoView: View {
     
-    let idRecord: String
-    
-    let record: Alumno?
-    
     @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var id: String = ""
     @State private var name: String = ""
     @State private var lastname1: String = ""
     @State private var lastname2: String = ""
     @State private var academicId: String = ""
-    
     @State private var selectedIdTarjeta: Int = 0
-    
     @State private var idsFromAlumnoGrupo: [Int64] = []
     @State private var indexSelectedGrupos: [Int] = []
     
-
+    let alumno: Alumno?
     
     private func updateProperties() {
-        guard let record = record else {
+        guard let record = alumno else {
             // Si record no existe, no actualizar nada
             return
         }
         
-        id = record.id
         name = record.name
         lastname1 = record.lastname1
         lastname2 = record.lastname2
@@ -46,101 +38,61 @@ struct AlumnoView: View {
         } else {
             selectedIdTarjeta = 0
         }
-        
-        for i in 0..<viewModel.alumnosGrupos.count {
-            if viewModel.alumnosGrupos[i].idAlumno == record.id {
-                
-
-                idsFromAlumnoGrupo.append(viewModel.alumnosGrupos[i].id!)
-                
-                // Bucle anidado para buscar coincidencias con grupos
-                for j in 0..<viewModel.grupos.count {
-                    if viewModel.alumnosGrupos[i].idGrupo == viewModel.grupos[j].id {
-                        // Almacena la posición del grupo en indexSelectedGrupos
-                        indexSelectedGrupos.append(j)
-
-                    }
-                }
-            }
-            
-            print("Ids from AlumnoGrupo: \(idsFromAlumnoGrupo)")
-            print("Index selected Grupos: \(indexSelectedGrupos)")
-
-            
-        }
-        
     }
     func handleUpdate() {
-
-        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
-
-        viewModel.updateAlumno(withId: idRecord, record: alumno)
         
-        let alumnosGrupos: [AlumnoGrupo] = indexSelectedGrupos.map { idGrupo in
-            return AlumnoGrupo(idAlumno: id, idGrupo: viewModel.grupos[idGrupo].id)
-        }
+        let alumno = Alumno(
+            name: name,
+            lastname1: lastname1,
+            lastname2: lastname2,
+            academicId: academicId,
+            idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id
+        )
         
-        viewModel.deleteCreateAlumnoGrupo(withIds: idsFromAlumnoGrupo, alumnosGrupos: alumnosGrupos)
+        viewModel.updateAlumno(record: alumno)
         
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleDelete() {
-        viewModel.deleteAlumno(withId: idRecord)
+        guard let alumno = alumno else { return }
+        viewModel.deleteAlumno(alumno: alumno)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleCreate() {
         
-        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
-            viewModel.createAlumno(alumno: alumno)
+        let alumno = Alumno(
+            name: name,
+            lastname1: lastname1,
+            lastname2: lastname2,
+            academicId: academicId,
+            idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id
+        )
         
-        let alumnosGrupos: [AlumnoGrupo] = indexSelectedGrupos.map { idGrupo in
-            return AlumnoGrupo(idAlumno: id, idGrupo: viewModel.grupos[idGrupo].id)
-        }
-        
-        viewModel.deleteCreateAlumnoGrupo(withIds: idsFromAlumnoGrupo, alumnosGrupos: alumnosGrupos)
+        viewModel.createAlumno(alumno: alumno)
         
         self.presentationMode.wrappedValue.dismiss()
     }
     
-    func handleScan() {
-        let randomString = String((0..<10).map { _ in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()! })
-        id = randomString
-    }
-    
     func handleAddGrupo(){
-
+        
         if let firstUnselectedIndex = viewModel.grupos.indices.first(where: { !indexSelectedGrupos.contains($0) }) {
-                indexSelectedGrupos.append(firstUnselectedIndex)
-            }
+            indexSelectedGrupos.append(firstUnselectedIndex)
+        }
     }
     
     func handleDeleteGrupo(id: Int){
         indexSelectedGrupos.removeAll { $0 == id }
-
+        
     }
     
     var body: some View {
-      
+        
         List{
             Section(header: Text("Información Personal")) {
-                if idRecord.isEmpty {
-                    HStack{
-                        Text("ID:")
-                        
-                        TextField("Ingrese id", text: $id)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        Button(action: {
-                            handleScan()
-                        }) {
-                            Text("Autogenerar")
-                        }
-                    }
-                }
-                
                 HStack{
                     Text("Nombre:")
                     
@@ -178,8 +130,7 @@ struct AlumnoView: View {
                     }
                 }
                 
-                
-                if !idRecord.isEmpty {
+                if alumno == nil {
                     Button(action: {
                         handleDelete()
                     }) {
@@ -188,66 +139,33 @@ struct AlumnoView: View {
                 }
                 
             }
-            
-            Section(header: Text("Grupos")) {
-                
-                
-                ForEach(indexSelectedGrupos.indices, id: \.self) { i in
-                    HStack{
-                        Picker("Grupo:", selection: $indexSelectedGrupos[i]) {
-                            ForEach(viewModel.grupos.indices.filter { !indexSelectedGrupos.contains($0) || $0 == indexSelectedGrupos[i] }, id: \.self) { sGIndex in
-                                Text(viewModel.grupos[sGIndex].materia)
-                                    .tag(sGIndex)
-                            }
-                            
-                        }.pickerStyle(.menu)
-                            .tint(.gray)
-                        Button(action: {
-                            handleDeleteGrupo(id: indexSelectedGrupos[i])
-                        }) {
-                            Text("Borrar")
-                        }
-                    }
-                }
-                Button(action: {
-                    handleAddGrupo()
-                }) {
-                    Text("Añadir")
-                }
-                .disabled(indexSelectedGrupos.count >= viewModel.grupos.count)
-                
-                
+            Text("Grupo")
+            if let grupo = viewModel.getGrupoFromAlumno(idGrupo: alumno?.idGrupo) {
+                Text("Materia \(grupo.materia))")
+                Text("Grupo \(grupo.carrera))")
             }
-        
-            
         }
-            
         
-            .onAppear {
-                updateProperties()
-            }
-            .navigationBarItems(
-                trailing: {
-                    if idRecord.isEmpty {
-                        Button(action: {
-                            handleCreate()
-                        }) {
-                            Text("Crear")
-                        }
-                    } else {
-                        Button(action: {
-                            handleUpdate()
-                        }) {
-                            Text("Actualizar")
-                        }
+        
+        .onAppear {
+            updateProperties()
+        }
+        .navigationBarItems(
+            trailing: {
+                if alumno == nil {
+                    Button(action: {
+                        handleCreate()
+                    }) {
+                        Text("Crear")
                     }
-                }()
-            )
-
-
+                } else {
+                    Button(action: {
+                        handleUpdate()
+                    }) {
+                        Text("Actualizar")
+                    }
+                }
+            }()
+        )
     }
 }
-
-//#Preview {
-//    RecordView(typeEntity: "Alumno", idRecord: "4120")
-//}
