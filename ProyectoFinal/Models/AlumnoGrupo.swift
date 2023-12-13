@@ -13,6 +13,8 @@ struct AlumnoGrupo: Codable, Identifiable, FetchableRecord, PersistableRecord {
     var idAlumno: String
     var idGrupo: String
     
+    static let grupo = belongsTo(Grupo.self)
+    
     mutating func updateObject(object: AlumnoGrupo) {
         self.id = object.id
         self.idAlumno = object.idAlumno

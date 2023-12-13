@@ -10,7 +10,7 @@ import SwiftUI
 struct AlumnoView: View {
     
     let idRecord: String
-
+    
     let record: Alumno?
     
     @EnvironmentObject var viewModel: ViewModel
@@ -24,8 +24,9 @@ struct AlumnoView: View {
     
     @State private var selectedIdTarjeta: Int = 0
     
-    @State private var numberOfGrupos: Int = 0
+    @State private var idsFromAlumnoGrupo: [Int64] = []
     @State private var indexSelectedGrupos: [Int] = []
+    
 
     
     private func updateProperties() {
@@ -48,7 +49,9 @@ struct AlumnoView: View {
         
         for i in 0..<viewModel.alumnosGrupos.count {
             if viewModel.alumnosGrupos[i].idAlumno == record.id {
-                numberOfGrupos += 1
+                
+
+                idsFromAlumnoGrupo.append(viewModel.alumnosGrupos[i].id!)
                 
                 // Bucle anidado para buscar coincidencias con grupos
                 for j in 0..<viewModel.grupos.count {
@@ -59,7 +62,10 @@ struct AlumnoView: View {
                     }
                 }
             }
-            print(indexSelectedGrupos)
+            
+            print("Ids from AlumnoGrupo: \(idsFromAlumnoGrupo)")
+            print("Index selected Grupos: \(indexSelectedGrupos)")
+
             
         }
         
@@ -69,7 +75,13 @@ struct AlumnoView: View {
         let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
 
         viewModel.updateAlumno(withId: idRecord, record: alumno)
-
+        
+        let alumnosGrupos: [AlumnoGrupo] = indexSelectedGrupos.map { idGrupo in
+            return AlumnoGrupo(idAlumno: id, idGrupo: viewModel.grupos[idGrupo].id)
+        }
+        
+        viewModel.deleteCreateAlumnoGrupo(withIds: idsFromAlumnoGrupo, alumnosGrupos: alumnosGrupos)
+        
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -82,8 +94,14 @@ struct AlumnoView: View {
     
     func handleCreate() {
         
-        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: "hola")
+        let alumno = Alumno(id: id, name: name, lastname1: lastname1, lastname2: lastname2, academicId: academicId, idTarjeta: viewModel.tarjetas[selectedIdTarjeta].id)
             viewModel.createAlumno(alumno: alumno)
+        
+        let alumnosGrupos: [AlumnoGrupo] = indexSelectedGrupos.map { idGrupo in
+            return AlumnoGrupo(idAlumno: id, idGrupo: viewModel.grupos[idGrupo].id)
+        }
+        
+        viewModel.deleteCreateAlumnoGrupo(withIds: idsFromAlumnoGrupo, alumnosGrupos: alumnosGrupos)
         
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -91,6 +109,18 @@ struct AlumnoView: View {
     func handleScan() {
         let randomString = String((0..<10).map { _ in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()! })
         id = randomString
+    }
+    
+    func handleAddGrupo(){
+
+        if let firstUnselectedIndex = viewModel.grupos.indices.first(where: { !indexSelectedGrupos.contains($0) }) {
+                indexSelectedGrupos.append(firstUnselectedIndex)
+            }
+    }
+    
+    func handleDeleteGrupo(id: Int){
+        indexSelectedGrupos.removeAll { $0 == id }
+
     }
     
     var body: some View {
@@ -163,13 +193,29 @@ struct AlumnoView: View {
                 
                 
                 ForEach(indexSelectedGrupos.indices, id: \.self) { i in
-                    Picker("", selection: $indexSelectedGrupos[i]) {
-                        ForEach(viewModel.grupos.indices, id: \.self) { sGIndex in
-                            Text(viewModel.grupos[sGIndex].materia).tag(sGIndex)
+                    HStack{
+                        Picker("Grupo:", selection: $indexSelectedGrupos[i]) {
+                            ForEach(viewModel.grupos.indices.filter { !indexSelectedGrupos.contains($0) || $0 == indexSelectedGrupos[i] }, id: \.self) { sGIndex in
+                                Text(viewModel.grupos[sGIndex].materia)
+                                    .tag(sGIndex)
+                            }
+                            
+                        }.pickerStyle(.menu)
+                            .tint(.gray)
+                        Button(action: {
+                            handleDeleteGrupo(id: indexSelectedGrupos[i])
+                        }) {
+                            Text("Borrar")
                         }
                     }
                 }
-
+                Button(action: {
+                    handleAddGrupo()
+                }) {
+                    Text("Añadir")
+                }
+                .disabled(indexSelectedGrupos.count >= viewModel.grupos.count)
+                
                 
             }
         

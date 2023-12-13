@@ -153,6 +153,8 @@ struct Persistence {
         }
     }
     
+
+    
     func updateAlumno(withId id: String, record: Alumno) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
@@ -265,6 +267,28 @@ struct Persistence {
         }
     }
     
+    func deleteAlumnoGrupos(withIds ids: [Int64]) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                for id in ids {
+                    if let alumnoGrupo = try AlumnoGrupo.fetchOne(db, key: id) {
+                        // Ejecutar la eliminación en la base de datos
+                        try alumnoGrupo.delete(db)
+                    } else {
+                        // Manejar el caso en el que el AlumnoGrupo con el ID dado no fue encontrado
+                        print("No se encontró un AlumnoGrupo con el ID \(id).")
+                    }
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al borrar los AlumnoGrupos: \(error)")
+        }
+    }
+    
     func createAlumno(alumno: Alumno) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
@@ -279,6 +303,24 @@ struct Persistence {
             print("Error al crear el alumno: \(error)")
         }
     }
+    
+    func createAlumnoGrupos(alumnosGrupos: [AlumnoGrupo]) {
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+            let dbQueue = try DatabaseQueue(path: path + "/db.sqlite")
+
+            try dbQueue.write { db in
+                // Crear varios AlumnoGrupo en la base de datos
+                for alumnoGrupo in alumnosGrupos {
+                    try alumnoGrupo.save(db)
+                }
+            }
+        } catch {
+            // Manejar errores de la base de datos
+            print("Error al crear los AlumnoGrupos: \(error)")
+        }
+    }
+
     
     func createTarjeta(tarjeta: Tarjeta) {
         do {

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import GRDB
 
 class ViewModel: ObservableObject {
     
@@ -15,6 +15,7 @@ class ViewModel: ObservableObject {
     @Published var grupos = [Grupo]()
     @Published var tarjetas = [Tarjeta]()
     @Published var alumnosGrupos = [AlumnoGrupo]()
+
     
     private let persistence: Persistence
     
@@ -25,6 +26,7 @@ class ViewModel: ObservableObject {
         self.tarjetas = persistence.tarjetas()
         self.alumnosGrupos = persistence.alumnosGrupos()
     }
+    
     
     func updateAlumno(withId id: String, record: Alumno) {
         persistence.updateAlumno(withId: id, record: record)
@@ -63,6 +65,17 @@ class ViewModel: ObservableObject {
         self.grupos = persistence.grupos()
     }
     
+    func deleteCreateAlumnoGrupo(withIds ids: [Int64], alumnosGrupos: [AlumnoGrupo]) {
+        // Verificar si el arreglo 'ids' no está vacío antes de borrar
+        if !ids.isEmpty {
+            persistence.deleteAlumnoGrupos(withIds: ids)
+        }
+        
+        persistence.createAlumnoGrupos(alumnosGrupos: alumnosGrupos)
+        
+        self.alumnosGrupos = persistence.alumnosGrupos()
+    }
+
     func createTarjeta(tarjeta: Tarjeta){
         persistence.createTarjeta(tarjeta: tarjeta)
         self.tarjetas = persistence.tarjetas()

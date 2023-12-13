@@ -15,7 +15,7 @@ struct Alumno: Codable, Identifiable, FetchableRecord, PersistableRecord {
     var lastname2: String
     var academicId: String
     var idTarjeta: String
-    
+
 
     mutating func updateObject(object: Alumno) {
         self.id = object.id
