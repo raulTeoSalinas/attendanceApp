@@ -96,7 +96,9 @@ class ViewModel: ObservableObject {
         return grupos.filter { $0.id == idGrupo }.first
     }
     
-    func handleScan() -> String {
-        return serviceNFC.read()
+    func handleScan(completion: @escaping (String) -> Void) {
+        
+        serviceNFC.read(completion: completion)
     }
+
 }

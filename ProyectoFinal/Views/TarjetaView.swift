@@ -46,7 +46,14 @@ struct TarjetaView: View {
                     TextField("Ingrese tarjeta", text: $tarjetaId)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
-                        tarjetaId = viewModel.handleScan()
+                        
+                        viewModel.handleScan(completion: { readId in
+                            self.tarjetaId = readId
+                            let tarjeta = Tarjeta(id: tarjetaId)
+                            viewModel.createTarjeta(tarjeta: tarjeta)
+                        })
+                        
+                        
                     }) {
                         Text("Scanear")
                     }

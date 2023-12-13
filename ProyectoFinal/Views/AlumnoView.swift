@@ -137,9 +137,12 @@ struct AlumnoView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         
-                        idTarjeta = viewModel.handleScan()
-                        let tarjeta = Tarjeta(id: idTarjeta)
-                        viewModel.createTarjeta(tarjeta: tarjeta)
+                        viewModel.handleScan(completion: { readId in
+                            self.idTarjeta = readId
+                            let tarjeta = Tarjeta(id: idTarjeta)
+                            viewModel.createTarjeta(tarjeta: tarjeta)
+                        })
+                        
                         
                     }) {
                         Text("Scanear")

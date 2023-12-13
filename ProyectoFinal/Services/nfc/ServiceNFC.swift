@@ -15,7 +15,9 @@ class ServiceNFC {
         self.nfc = NFCImpl()
     }
     
-    func read() -> String {
-        nfc.read()
+    func read(completion: @escaping (String) -> Void) {
+        
+        nfc.read(completion: completion)
+        
     }
 }
