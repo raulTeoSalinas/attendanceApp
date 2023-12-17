@@ -132,7 +132,7 @@ struct AlumnoView: View {
                 }
                 
                 HStack{
-                    Text("Id:")
+                    Text("Tarjeta:")
                     TextField("Ingrese tarjeta", text: $idTarjeta)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
@@ -156,7 +156,7 @@ struct AlumnoView: View {
                     }
                 }
                 
-                if alumno == nil {
+                if alumno != nil {
                     Button(action: {
                         handleDelete()
                     }) {

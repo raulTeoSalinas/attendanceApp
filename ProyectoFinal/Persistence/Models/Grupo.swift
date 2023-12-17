@@ -13,11 +13,6 @@ struct Grupo: Codable, Identifiable {
     var materia: String
     var carrera: String
     
-    init(id: Int64? = nil, materia: String, carrera: String) {
-        self.id = id
-        self.materia = materia
-        self.carrera = carrera
-    }
 }
 
 extension Grupo: FetchableRecord, PersistableRecord { }

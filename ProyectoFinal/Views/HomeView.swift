@@ -16,8 +16,7 @@ struct HomeView: View {
     ]
     
     let menuItemsAsistencia: [MenuItem] = [
-            MenuItem(name: "Alumnos"),
-            MenuItem(name: "Profesores")
+            MenuItem(name: "Asistencia"),
     ]
    
     var body: some View {
@@ -37,7 +36,7 @@ struct HomeView: View {
                         
                     }
                 }
-                Section(header: Text("Asistencia")) {
+                Section(header: Text("Asistencias")) {
                     ForEach(menuItemsAsistencia) { menuItem in
                         NavigationLink(destination: EntityList(typeEntity: menuItem.name)){
                             

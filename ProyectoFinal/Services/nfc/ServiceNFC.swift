@@ -7,6 +7,21 @@
 
 import Foundation
 
+//class ServiceNFC {
+//    
+//    var nfc: NFCScan
+//    
+//    init() {
+//        self.nfc = NFCImpl()
+//    }
+//    
+//    func read(completion: @escaping (String) -> Void) {
+//        
+//        nfc.read(completion: completion)
+//        
+//    }
+//}
+
 class ServiceNFC {
     
     var nfc: NFCScan

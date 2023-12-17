@@ -13,42 +13,57 @@ struct EntityList: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-            List {
-                switch typeEntity {
-                case "Alumnos":
-                    ForEach(viewModel.alumnos) { alumno in
-                        NavigationLink(destination: AlumnoView(alumno: alumno)) {
-                               Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
-                           }
-                       }
-                case "Grupos":
-                    ForEach(viewModel.grupos) { grupo in
-                        NavigationLink(destination: GrupoView(grupo: grupo)) {
-                            Text("\(grupo.materia)")
-                        }
-                        
+        List {
+            switch typeEntity {
+            case "Alumnos":
+                ForEach(viewModel.alumnos) { alumno in
+                    NavigationLink(destination: AlumnoView(alumno: alumno)) {
+                        Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                     }
-                case "Tarjetas":
-                    ForEach(viewModel.tarjetas) { tarjeta in
-                        NavigationLink(destination: TarjetaView( tarjeta: tarjeta)) {
-                            Text("\(tarjeta.id)")
-                        }
-                        
-                    }
-                default:
-                    Text("Tipo de entidad no reconocido")
                 }
-            }.navigationTitle(typeEntity)
+            case "Grupos":
+                ForEach(viewModel.grupos) { grupo in
+                    NavigationLink(destination: GrupoView(grupo: grupo)) {
+                        Text("\(grupo.materia)")
+                    }
+                    
+                }
+            case "Tarjetas":
+                ForEach(viewModel.tarjetas) { tarjeta in
+                    NavigationLink(destination: TarjetaView( tarjeta: tarjeta)) {
+                        Text("\(tarjeta.id)")
+                    }
+                    
+                }
+            case "Asistencia":
+                ForEach(viewModel.grupos) { grupo in
+                    NavigationLink(destination: MenuAsistenciaView( grupoSelected: grupo)) {
+                        Text("\(grupo.materia)")
+                    }
+                    
+                }
+            default:
+                Text("Tipo de entidad no reconocido")
+            }
+        }.navigationTitle(typeEntity)
             .navigationBarItems(
-                trailing: NavigationLink(destination:
-                    typeEntity == "Grupos" ?
-                    AnyView(GrupoView(grupo: nil)) :
-                    typeEntity == "Alumnos" ?
-                    AnyView(AlumnoView(alumno: nil)) :
-                    AnyView(TarjetaView(tarjeta: nil))
-                ) {
-                    Text("Crear")
-                }
+                trailing: {
+                    Group {
+                        if typeEntity != "Asistencia" {
+                            NavigationLink(destination:
+                                typeEntity == "Grupos" ?
+                                AnyView(GrupoView(grupo: nil)) :
+                                typeEntity == "Alumnos" ?
+                                AnyView(AlumnoView(alumno: nil)) :
+                                AnyView(TarjetaView(tarjeta: nil))
+                            ) {
+                                Text("Crear")
+                            }
+                        } else {
+                            EmptyView()
+                        }
+                    }
+                }()
             )
-        }
+    }
 }

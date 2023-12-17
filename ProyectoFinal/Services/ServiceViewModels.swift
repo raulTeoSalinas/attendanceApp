@@ -18,7 +18,8 @@ class ServiceViewModels {
         viewModel = ViewModel(
             alumnosDAO: AlumnoDAO(persistence: servicePersistence.persistence),
             grupoDAO: GrupoDAO(persistence: servicePersistence.persistence),
-            tarjetaDAO: TarjetaDAO(persistence: servicePersistence.persistence)
+            tarjetaDAO: TarjetaDAO(persistence: servicePersistence.persistence),
+            asistenciaDAO: AsistenciaDAO(persistence: servicePersistence.persistence)
         )
     }
 }

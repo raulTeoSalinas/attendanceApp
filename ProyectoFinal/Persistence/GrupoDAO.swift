@@ -17,7 +17,7 @@ class GrupoDAO {
     
     
     func createGrupo(grupo: Grupo) throws {
-        return try persistence.dbQueue.read { db in
+        return try persistence.dbQueue.write { db in
             try grupo.save(db)
         }
     }

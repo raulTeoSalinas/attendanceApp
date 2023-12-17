@@ -61,6 +61,30 @@ extension PersistenceImpl {
             try Alumno(name: "Barbara", lastname1: "Lopez", lastname2: "Velazquez", academicId: "3160", idTarjeta: tarjetasId[1], idGrupo: gruposId[1] ).insert(db)
             try Alumno(name: "Ivan", lastname1: "Perez", lastname2: "Gutierrez", academicId: "3164", idTarjeta: tarjetasId[2], idGrupo: gruposId[2]).insert(db)
         }
+        
+        let alumnosId = try dbQueue.read { db in try Alumno.fetchAll(db) }.compactMap { $0.id}
+        
+        try dbQueue.write { db in
+            try Asistencia(idGrupo: gruposId[0], idAlumno: alumnosId[0]).insert(db)
+            try Asistencia(idGrupo: gruposId[0], idAlumno: alumnosId[1]).insert(db)
+            try Asistencia(idGrupo: gruposId[0], idAlumno: alumnosId[1]).insert(db)
+            try Asistencia(idGrupo: gruposId[0], idAlumno: alumnosId[1]).insert(db)
+            
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[2]).insert(db)
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[2]).insert(db)
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[2]).insert(db)
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[0]).insert(db)
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[0]).insert(db)
+            try Asistencia(idGrupo: gruposId[1], idAlumno: alumnosId[0]).insert(db)
+            
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[0]).insert(db)
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[0]).insert(db)
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[1]).insert(db)
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[1]).insert(db)
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[2]).insert(db)
+            try Asistencia(idGrupo: gruposId[2], idAlumno: alumnosId[2]).insert(db)
+
+        }
     }
     
 }

@@ -39,10 +39,20 @@ class Migrations {
                 t.column("lastname2", .text).notNull()
                 t.column("academicId", .text).notNull()
                 t.column("idTarjeta", .text).notNull()
-                t.column("idGrupo", .text)
+                t.column("idGrupo", .integer)
 
                 t.foreignKey(["idTarjeta"], references: "tarjeta", onDelete: .cascade)
                 t.foreignKey(["idGrupo"], references: "grupo", onDelete: .restrict)
+            }
+            
+            try db.create(table: "asistencia") { t in
+                t.autoIncrementedPrimaryKey("id")
+                t.column("time", .datetime).notNull()
+                t.column("idGrupo", .integer).notNull()
+                t.column("idAlumno", .integer).notNull()
+
+                t.foreignKey(["idGrupo"], references: "grupo", onDelete: .restrict)
+                t.foreignKey(["idAlumno"], references: "alumno", onDelete: .restrict)
             }
         }
         
