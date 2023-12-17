@@ -9,12 +9,15 @@ import SwiftUI
 
 struct AsistenciaView: View {
     
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var asistenciaViewModel: AsistenciaViewModel
+    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
+    @EnvironmentObject var tarjetaViewModel: TarjetaViewModel
+    
     let grupoSelected: Grupo
     @State private var tarjetaId: String = ""
     
     func handleAdd(){
-        viewModel.createAsistencia(idGrupo: grupoSelected.id!, idTarjeta: tarjetaId)
+        asistenciaViewModel.createAsistencia(idGrupo: grupoSelected.id!, idTarjeta: tarjetaId, alumnos: alumnoViewModel.alumnos)
         tarjetaId = ""
     }
     
@@ -27,7 +30,7 @@ struct AsistenciaView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         
-                        viewModel.handleScan(completion: { readId in
+                        tarjetaViewModel.handleScan(completion: { readId in
                             self.tarjetaId = readId
                         })
                         
@@ -45,8 +48,8 @@ struct AsistenciaView: View {
             }
             
             Section(header: Text("Lista de asistencias")){
-                ForEach(viewModel.asistencias) { asistencia in
-                    if let alumno = viewModel.alumnos.first(where: { $0.id == asistencia.idAlumno && grupoSelected.id == asistencia.idGrupo }) {
+                ForEach(asistenciaViewModel.asistencias) { asistencia in
+                    if let alumno = alumnoViewModel.alumnos.first(where: { $0.id == asistencia.idAlumno && grupoSelected.id == asistencia.idGrupo }) {
                         
                         Text("Alumno: \(alumno.lastname1) \(alumno.lastname2) \(alumno.name)\nFecha: \(asistencia.time.formatted(.dateTime.month().day().year().hour().minute()))")
                         

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct TarjetaView: View {
     
-
-    let tarjeta: Tarjeta?
     
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var tarjetaViewModel: TarjetaViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var tarjetaId: String = ""
+    
+    let tarjeta: Tarjeta?
     
     private func updateProperties() {
         if let tarjeta = tarjeta {
@@ -26,7 +26,7 @@ struct TarjetaView: View {
 
     func handleDelete() {
         guard let tarjeta = tarjeta else { return }
-        viewModel.deleteTarjeta(tarjeta: tarjeta)
+        tarjetaViewModel.deleteTarjeta(tarjeta: tarjeta)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -34,7 +34,7 @@ struct TarjetaView: View {
     
     func handleCreate() {
         let tarjeta = Tarjeta(id: tarjetaId)
-        viewModel.createTarjeta(tarjeta: tarjeta)
+        tarjetaViewModel.createTarjeta(tarjeta: tarjeta)
         self.presentationMode.wrappedValue.dismiss()
     }
     
@@ -47,10 +47,10 @@ struct TarjetaView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         
-                        viewModel.handleScan(completion: { readId in
+                        tarjetaViewModel.handleScan(completion: { readId in
                             self.tarjetaId = readId
                             let tarjeta = Tarjeta(id: tarjetaId)
-                            viewModel.createTarjeta(tarjeta: tarjeta)
+                            tarjetaViewModel.createTarjeta(tarjeta: tarjeta)
                         })
                         
                         

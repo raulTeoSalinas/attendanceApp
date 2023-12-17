@@ -20,7 +20,7 @@
 		955BB5C72B268F46006B7A66 /* Alumno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5C62B268F46006B7A66 /* Alumno.swift */; };
 		955BB5CD2B269B27006B7A66 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CC2B269B27006B7A66 /* HomeView.swift */; };
 		955BB5CF2B269D17006B7A66 /* EntityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5CE2B269D17006B7A66 /* EntityList.swift */; };
-		955BB5D12B26A6CF006B7A66 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D02B26A6CF006B7A66 /* ViewModel.swift */; };
+		955BB5D12B26A6CF006B7A66 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D02B26A6CF006B7A66 /* MainViewModel.swift */; };
 		955BB5D32B26AB21006B7A66 /* AlumnoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D22B26AB21006B7A66 /* AlumnoView.swift */; };
 		955BB5D72B26FCF6006B7A66 /* Grupo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5D62B26FCF6006B7A66 /* Grupo.swift */; };
 		955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955BB5DA2B2701F5006B7A66 /* GrupoView.swift */; };
@@ -28,6 +28,10 @@
 		9582039F2B2E97B1004ECB0B /* ReportAsistenciaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582039E2B2E97B1004ECB0B /* ReportAsistenciaView.swift */; };
 		958203A12B2EA6DD004ECB0B /* Asistencia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203A02B2EA6DD004ECB0B /* Asistencia.swift */; };
 		958203A32B2EBB4B004ECB0B /* AsistenciaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203A22B2EBB4B004ECB0B /* AsistenciaDAO.swift */; };
+		958203A52B2EE546004ECB0B /* AlumnoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203A42B2EE546004ECB0B /* AlumnoViewModel.swift */; };
+		958203A72B2EEF0F004ECB0B /* TarjetaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203A62B2EEF0F004ECB0B /* TarjetaViewModel.swift */; };
+		958203A92B2EEF34004ECB0B /* GrupoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203A82B2EEF34004ECB0B /* GrupoViewModel.swift */; };
+		958203AB2B2EF25B004ECB0B /* AsistenciaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958203AA2B2EF25B004ECB0B /* AsistenciaViewModel.swift */; };
 		95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20212B28289E00BFA2AB /* Tarjeta.swift */; };
 		95AF20242B2844D700BFA2AB /* TarjetaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF20232B2844D700BFA2AB /* TarjetaView.swift */; };
 		D326F97A2B2944700036A943 /* Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326F9792B2944700036A943 /* Migrations.swift */; };
@@ -75,7 +79,7 @@
 		955BB5C62B268F46006B7A66 /* Alumno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alumno.swift; sourceTree = "<group>"; };
 		955BB5CC2B269B27006B7A66 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		955BB5CE2B269D17006B7A66 /* EntityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityList.swift; sourceTree = "<group>"; };
-		955BB5D02B26A6CF006B7A66 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		955BB5D02B26A6CF006B7A66 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		955BB5D22B26AB21006B7A66 /* AlumnoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoView.swift; sourceTree = "<group>"; };
 		955BB5D62B26FCF6006B7A66 /* Grupo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grupo.swift; sourceTree = "<group>"; };
 		955BB5DA2B2701F5006B7A66 /* GrupoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoView.swift; sourceTree = "<group>"; };
@@ -83,6 +87,10 @@
 		9582039E2B2E97B1004ECB0B /* ReportAsistenciaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAsistenciaView.swift; sourceTree = "<group>"; };
 		958203A02B2EA6DD004ECB0B /* Asistencia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asistencia.swift; sourceTree = "<group>"; };
 		958203A22B2EBB4B004ECB0B /* AsistenciaDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistenciaDAO.swift; sourceTree = "<group>"; };
+		958203A42B2EE546004ECB0B /* AlumnoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlumnoViewModel.swift; sourceTree = "<group>"; };
+		958203A62B2EEF0F004ECB0B /* TarjetaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarjetaViewModel.swift; sourceTree = "<group>"; };
+		958203A82B2EEF34004ECB0B /* GrupoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrupoViewModel.swift; sourceTree = "<group>"; };
+		958203AA2B2EF25B004ECB0B /* AsistenciaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsistenciaViewModel.swift; sourceTree = "<group>"; };
 		95AF20212B28289E00BFA2AB /* Tarjeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tarjeta.swift; sourceTree = "<group>"; };
 		95AF20232B2844D700BFA2AB /* TarjetaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TarjetaView.swift; sourceTree = "<group>"; };
 		D326F9792B2944700036A943 /* Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migrations.swift; sourceTree = "<group>"; };
@@ -185,7 +193,11 @@
 		954808B92B230C1A0073A275 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				955BB5D02B26A6CF006B7A66 /* ViewModel.swift */,
+				955BB5D02B26A6CF006B7A66 /* MainViewModel.swift */,
+				958203A42B2EE546004ECB0B /* AlumnoViewModel.swift */,
+				958203A62B2EEF0F004ECB0B /* TarjetaViewModel.swift */,
+				958203A82B2EEF34004ECB0B /* GrupoViewModel.swift */,
+				958203AA2B2EF25B004ECB0B /* AsistenciaViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -387,8 +399,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				955BB5D12B26A6CF006B7A66 /* ViewModel.swift in Sources */,
+				955BB5D12B26A6CF006B7A66 /* MainViewModel.swift in Sources */,
 				95AF20242B2844D700BFA2AB /* TarjetaView.swift in Sources */,
+				958203A52B2EE546004ECB0B /* AlumnoViewModel.swift in Sources */,
 				D3C21E062B297556004D9016 /* NFCScan.swift in Sources */,
 				D326F9812B2948CF0036A943 /* TarjetaDAO.swift in Sources */,
 				955BB5D32B26AB21006B7A66 /* AlumnoView.swift in Sources */,
@@ -410,6 +423,9 @@
 				9548088F2B230B410073A275 /* ProyectoFinalApp.swift in Sources */,
 				95AF20222B28289E00BFA2AB /* Tarjeta.swift in Sources */,
 				955160D62B2786F1008D2DFF /* AsistenciaView.swift in Sources */,
+				958203A92B2EEF34004ECB0B /* GrupoViewModel.swift in Sources */,
+				958203A72B2EEF0F004ECB0B /* TarjetaViewModel.swift in Sources */,
+				958203AB2B2EF25B004ECB0B /* AsistenciaViewModel.swift in Sources */,
 				955BB5DB2B2701F5006B7A66 /* GrupoView.swift in Sources */,
 				958203A32B2EBB4B004ECB0B /* AsistenciaDAO.swift in Sources */,
 				958203A12B2EA6DD004ECB0B /* Asistencia.swift in Sources */,

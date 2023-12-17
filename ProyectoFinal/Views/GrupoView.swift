@@ -9,13 +9,14 @@ import SwiftUI
 
 struct GrupoView: View {
     
-    let grupo: Grupo?
+    @EnvironmentObject var grupoViewModel: GrupoViewModel
     
-    @EnvironmentObject var viewModel: ViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var materia: String = ""
     @State private var carrera: String = ""
+    
+    let grupo: Grupo?
     
     private func updateProperties() {
         if let grupo = grupo {
@@ -30,14 +31,14 @@ struct GrupoView: View {
         
         grupo = Grupo(id: grupo.id, materia: materia, carrera: carrera)
         
-        viewModel.updateGrupo(record: grupo)
+        grupoViewModel.updateGrupo(record: grupo)
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
     
     func handleDelete() {
         guard let grupo = grupo else { return }
-        viewModel.deleteGrupo(grupo: grupo)
+        grupoViewModel.deleteGrupo(grupo: grupo)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -46,7 +47,7 @@ struct GrupoView: View {
         
         let grupo = Grupo(materia: materia, carrera: carrera)
         
-        viewModel.createGrupo(grupo: grupo)
+        grupoViewModel.createGrupo(grupo: grupo)
         self.presentationMode.wrappedValue.dismiss()
     }
     

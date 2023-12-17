@@ -9,34 +9,37 @@ import SwiftUI
 
 struct EntityList: View {
     
+    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
+    @EnvironmentObject var grupoViewModel: GrupoViewModel
+    @EnvironmentObject var tarjetasViewModel: TarjetaViewModel
+    
     let typeEntity: String
-    @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
         List {
             switch typeEntity {
             case "Alumnos":
-                ForEach(viewModel.alumnos) { alumno in
+                ForEach(alumnoViewModel.alumnos) { alumno in
                     NavigationLink(destination: AlumnoView(alumno: alumno)) {
                         Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                     }
                 }
             case "Grupos":
-                ForEach(viewModel.grupos) { grupo in
+                ForEach(grupoViewModel.grupos) { grupo in
                     NavigationLink(destination: GrupoView(grupo: grupo)) {
                         Text("\(grupo.materia)")
                     }
                     
                 }
             case "Tarjetas":
-                ForEach(viewModel.tarjetas) { tarjeta in
+                ForEach(tarjetasViewModel.tarjetas) { tarjeta in
                     NavigationLink(destination: TarjetaView( tarjeta: tarjeta)) {
                         Text("\(tarjeta.id)")
                     }
                     
                 }
             case "Asistencia":
-                ForEach(viewModel.grupos) { grupo in
+                ForEach(grupoViewModel.grupos) { grupo in
                     NavigationLink(destination: MenuAsistenciaView( grupoSelected: grupo)) {
                         Text("\(grupo.materia)")
                     }

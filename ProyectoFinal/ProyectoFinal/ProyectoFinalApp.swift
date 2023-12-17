@@ -14,7 +14,7 @@ struct ProyectoFinalApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView().environmentObject(main.serviceVm.viewModel)
+            HomeView().environmentObject(main.serviceVm.alumnoViewModel).environmentObject(main.serviceVm.grupoViewModel).environmentObject(main.serviceVm.tarjetaViewModel).environmentObject(main.serviceVm.asistenciaViewModel)
         }
     }
 }
