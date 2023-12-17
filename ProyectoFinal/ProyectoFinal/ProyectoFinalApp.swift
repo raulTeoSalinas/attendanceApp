@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct ProyectoFinalApp: App {
     
-    let main = ServiceMain()
+    @StateObject var main = ServiceMain()
     
     var body: some Scene {
         WindowGroup {
-            HomeView().environmentObject(main.serviceVm.alumnoViewModel).environmentObject(main.serviceVm.grupoViewModel).environmentObject(main.serviceVm.tarjetaViewModel).environmentObject(main.serviceVm.asistenciaViewModel)
+            HomeView().environmentObject(main.serviceVm.mainViewModel)
         }
     }
 }

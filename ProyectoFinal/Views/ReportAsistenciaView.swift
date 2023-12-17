@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ReportAsistenciaView: View {
     
-    @EnvironmentObject var asistenciaViewModel: AsistenciaViewModel
-    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
+    @EnvironmentObject var mainVM: MainViewModel
 
     
     @State private var alumnoAsistenciaCount: [String: Int] = [:]
@@ -19,7 +18,7 @@ struct ReportAsistenciaView: View {
 
     
     func getAlumnoAsistenciaCount(){
-        alumnoAsistenciaCount = asistenciaViewModel.getAlumnoAsistenciaCount(grupo: grupoSelected, alumnos: alumnoViewModel.alumnos)
+        alumnoAsistenciaCount = mainVM.asistenciaViewModel.getAlumnoAsistenciaCount(grupo: grupoSelected, alumnos: mainVM.alumnoViewModel.alumnos)
     }
     
     var body: some View {

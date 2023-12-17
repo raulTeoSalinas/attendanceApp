@@ -10,6 +10,7 @@ import Foundation
 class ServiceViewModels {
     
     var servicePersistence: ServicePersistence
+    var mainViewModel: MainViewModel
     var alumnoViewModel: AlumnoViewModel
     var grupoViewModel: GrupoViewModel
     var tarjetaViewModel: TarjetaViewModel
@@ -22,6 +23,7 @@ class ServiceViewModels {
         grupoViewModel = GrupoViewModel(grupoDAO: GrupoDAO(persistence: servicePersistence.persistence))
         tarjetaViewModel = TarjetaViewModel(tarjetaDAO: TarjetaDAO(persistence: servicePersistence.persistence))
         asistenciaViewModel = AsistenciaViewModel(asistenciaDAO: AsistenciaDAO(persistence: servicePersistence.persistence))
+        mainViewModel = MainViewModel(alumnoViewmodel: alumnoViewModel, tarjetaViewmodel: tarjetaViewModel, grupoViewmodel: grupoViewModel, asistenciaViewmodel: asistenciaViewModel)
         
     }
 }

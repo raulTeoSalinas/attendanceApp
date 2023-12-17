@@ -9,15 +9,13 @@ import SwiftUI
 
 struct AsistenciaView: View {
     
-    @EnvironmentObject var asistenciaViewModel: AsistenciaViewModel
-    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
-    @EnvironmentObject var tarjetaViewModel: TarjetaViewModel
+    @EnvironmentObject var mainVM: MainViewModel
     
     let grupoSelected: Grupo
     @State private var tarjetaId: String = ""
     
     func handleAdd(){
-        asistenciaViewModel.createAsistencia(idGrupo: grupoSelected.id!, idTarjeta: tarjetaId, alumnos: alumnoViewModel.alumnos)
+        mainVM.asistenciaViewModel.createAsistencia(idGrupo: grupoSelected.id!, idTarjeta: tarjetaId, alumnos: mainVM.alumnoViewModel.alumnos)
         tarjetaId = ""
     }
     
@@ -30,7 +28,7 @@ struct AsistenciaView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         
-                        tarjetaViewModel.handleScan(completion: { readId in
+                        mainVM.tarjetaViewModel.handleScan(completion: { readId in
                             self.tarjetaId = readId
                         })
                         
@@ -48,8 +46,8 @@ struct AsistenciaView: View {
             }
             
             Section(header: Text("Lista de asistencias")){
-                ForEach(asistenciaViewModel.asistencias) { asistencia in
-                    if let alumno = alumnoViewModel.alumnos.first(where: { $0.id == asistencia.idAlumno && grupoSelected.id == asistencia.idGrupo }) {
+                ForEach(mainVM.asistenciaViewModel.asistencias) { asistencia in
+                    if let alumno = mainVM.alumnoViewModel.alumnos.first(where: { $0.id == asistencia.idAlumno && grupoSelected.id == asistencia.idGrupo }) {
                         
                         Text("Alumno: \(alumno.lastname1) \(alumno.lastname2) \(alumno.name)\nFecha: \(asistencia.time.formatted(.dateTime.month().day().year().hour().minute()))")
                         

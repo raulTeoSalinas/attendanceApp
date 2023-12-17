@@ -16,6 +16,16 @@ struct Alumno: Codable, Identifiable {
     var academicId: String
     var idTarjeta: String
     var idGrupo: Int64?
+    
+    init(id: Int64? = nil, name: String, lastname1: String, lastname2: String, academicId: String, idTarjeta: String, idGrupo: Int64? = nil) {
+        self.id = id
+        self.name = name
+        self.lastname1 = lastname1
+        self.lastname2 = lastname2
+        self.academicId = academicId
+        self.idTarjeta = idTarjeta
+        self.idGrupo = idGrupo
+    }
 }
 
 // GRDB

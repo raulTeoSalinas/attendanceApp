@@ -10,9 +10,7 @@ import SwiftUI
 struct AlumnoView: View {
     
 
-    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
-    @EnvironmentObject var tarjetaViewModel: TarjetaViewModel
-    @EnvironmentObject var grupoViewModel: GrupoViewModel
+    @EnvironmentObject var mainVM: MainViewModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -40,7 +38,7 @@ struct AlumnoView: View {
         academicId = record.academicId
         idTarjeta = record.idTarjeta
         
-        if let index = grupoViewModel.grupos.firstIndex(where: { $0.id == record.idGrupo }) {
+        if let index = mainVM.grupoViewModel.grupos.firstIndex(where: { $0.id == record.idGrupo }) {
             selectedIdGrupo = index
         } else {
             selectedIdGrupo = 0
@@ -57,11 +55,11 @@ struct AlumnoView: View {
             lastname2: lastname2,
             academicId: academicId,
             idTarjeta: idTarjeta,
-            idGrupo: grupoViewModel.grupos[selectedIdGrupo].id
+            idGrupo: mainVM.grupoViewModel.grupos[selectedIdGrupo].id
         )
 
         
-        alumnoViewModel.updateAlumno(record: alumno)
+        mainVM.alumnoViewModel.updateAlumno(record: alumno)
         
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
@@ -69,7 +67,7 @@ struct AlumnoView: View {
     
     func handleDelete() {
         guard let alumno = alumno else { return }
-        alumnoViewModel.deleteAlumno(alumno: alumno)
+        mainVM.alumnoViewModel.deleteAlumno(alumno: alumno)
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -82,9 +80,9 @@ struct AlumnoView: View {
             lastname2: lastname2,
             academicId: academicId,
             idTarjeta: idTarjeta,
-            idGrupo: grupoViewModel.grupos[selectedIdGrupo].id
+            idGrupo: mainVM.grupoViewModel.grupos[selectedIdGrupo].id
         )
-        alumnoViewModel.createAlumno(alumno: alumno)
+        mainVM.alumnoViewModel.createAlumno(alumno: alumno)
         
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -129,10 +127,10 @@ struct AlumnoView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         
-                        tarjetaViewModel.handleScan(completion: { readId in
+                        mainVM.tarjetaViewModel.handleScan(completion: { readId in
                             self.idTarjeta = readId
                             let tarjeta = Tarjeta(id: idTarjeta)
-                            tarjetaViewModel.createTarjeta(tarjeta: tarjeta)
+                            mainVM.tarjetaViewModel.createTarjeta(tarjeta: tarjeta)
                         })
                         
                         
@@ -142,7 +140,7 @@ struct AlumnoView: View {
                 }
                 
                 Picker("Grupo", selection: $selectedIdGrupo) {
-                    ForEach(Array(grupoViewModel.grupos.enumerated()), id: \.1.id) { index, grupo in
+                    ForEach(Array(mainVM.grupoViewModel.grupos.enumerated()), id: \.1.id) { index, grupo in
                         Text(grupo.materia)
                             .tag(index)
                     }

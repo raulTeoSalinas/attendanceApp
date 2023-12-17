@@ -8,45 +8,25 @@
 import Foundation
 import GRDB
 
-class ViewModel: ObservableObject {
+class MainViewModel: ObservableObject {
     
-    @Published var alumnos = [Alumno]()
-    @Published var grupos = [Grupo]()
-    @Published var tarjetas = [Tarjeta]()
-    @Published var asistencias = [Asistencia]()
-    
-    private let alumnosDAO: AlumnoDAO
-    private let grupoDAO: GrupoDAO
-    private let tarjetaDAO: TarjetaDAO
-    private let asistenciaDAO: AsistenciaDAO
-    private let serviceNFC: ServiceNFC
+    @Published var alumnoViewModel: AlumnoViewModel
+    @Published var grupoViewModel: GrupoViewModel
+    @Published var tarjetaViewModel: TarjetaViewModel
+    @Published var asistenciaViewModel: AsistenciaViewModel
     
     init(
-        alumnosDAO: AlumnoDAO,
-        grupoDAO: GrupoDAO,
-        tarjetaDAO: TarjetaDAO,
-        asistenciaDAO: AsistenciaDAO
+        alumnoViewmodel: AlumnoViewModel,
+        tarjetaViewmodel: TarjetaViewModel,
+        grupoViewmodel: GrupoViewModel,
+        asistenciaViewmodel: AsistenciaViewModel
     ) {
-        self.alumnosDAO = alumnosDAO
-        self.grupoDAO = grupoDAO
-        self.tarjetaDAO = tarjetaDAO
-        self.asistenciaDAO = asistenciaDAO
-        
-        
-        alumnos = try! alumnosDAO.getAlumnos()
-        grupos = try! grupoDAO.getGrupos()
-        tarjetas = try! tarjetaDAO.getTarjetas()
-        asistencias = try! asistenciaDAO.getAsistencias()
-        serviceNFC = ServiceNFC()
-    }
-        
-    func handleScan(completion: @escaping (String) -> Void) {
-        
-        serviceNFC.read(completion: completion)
-    }
+        self.alumnoViewModel = alumnoViewmodel
+        self.grupoViewModel = grupoViewmodel
+        self.tarjetaViewModel = tarjetaViewmodel
+        self.asistenciaViewModel = asistenciaViewmodel
     
-    
-
+    }
 
     
 }
