@@ -9,10 +9,10 @@ import Foundation
 
 class TarjetaViewModel: ObservableObject {
     
-    private let tarjetaDAO: TarjetaDAO
-    private let serviceNFC: ServiceNFC
     @Published var tarjetas = [Tarjeta]()
     
+    private let tarjetaDAO: TarjetaDAO
+    private let serviceNFC: ServiceNFC
     
     init(tarjetaDAO: TarjetaDAO) {
 

@@ -9,9 +9,7 @@ import SwiftUI
 
 struct EntityList: View {
     
-    @EnvironmentObject var alumnoViewModel: AlumnoViewModel
-    @EnvironmentObject var grupoViewModel: GrupoViewModel
-    @EnvironmentObject var tarjetasViewModel: TarjetaViewModel
+    @EnvironmentObject var mainVM: MainViewModel
     
     let typeEntity: String
     
@@ -19,27 +17,27 @@ struct EntityList: View {
         List {
             switch typeEntity {
             case "Alumnos":
-                ForEach(alumnoViewModel.alumnos) { alumno in
+                ForEach(mainVM.alumnoViewModel.alumnos) { alumno in
                     NavigationLink(destination: AlumnoView(alumno: alumno)) {
                         Text("\(alumno.name) \(alumno.lastname1) \(alumno.lastname2)")
                     }
                 }
             case "Grupos":
-                ForEach(grupoViewModel.grupos) { grupo in
+                ForEach(mainVM.grupoViewModel.grupos) { grupo in
                     NavigationLink(destination: GrupoView(grupo: grupo)) {
                         Text("\(grupo.materia)")
                     }
                     
                 }
             case "Tarjetas":
-                ForEach(tarjetasViewModel.tarjetas) { tarjeta in
+                ForEach(mainVM.tarjetaViewModel.tarjetas) { tarjeta in
                     NavigationLink(destination: TarjetaView( tarjeta: tarjeta)) {
                         Text("\(tarjeta.id)")
                     }
                     
                 }
             case "Asistencia":
-                ForEach(grupoViewModel.grupos) { grupo in
+                ForEach(mainVM.grupoViewModel.grupos) { grupo in
                     NavigationLink(destination: MenuAsistenciaView( grupoSelected: grupo)) {
                         Text("\(grupo.materia)")
                     }

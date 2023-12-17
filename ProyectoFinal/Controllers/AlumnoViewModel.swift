@@ -9,9 +9,9 @@ import Foundation
 
 class AlumnoViewModel: ObservableObject {
     
-
-    private let alumnosDAO: AlumnoDAO
     @Published var alumnos = [Alumno]()
+    
+    private let alumnosDAO: AlumnoDAO
     
     init(alumnosDAO: AlumnoDAO) {
         self.alumnosDAO = alumnosDAO
@@ -40,7 +40,5 @@ class AlumnoViewModel: ObservableObject {
             alumnos = try alumnosDAO.getAlumnos()
         } catch { }
     }
-    
-    
     
 }

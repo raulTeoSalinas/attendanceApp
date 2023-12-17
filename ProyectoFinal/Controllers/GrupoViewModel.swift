@@ -9,10 +9,9 @@ import Foundation
 
 class GrupoViewModel: ObservableObject {
     
-
-    private let grupoDAO: GrupoDAO
     @Published var grupos = [Grupo]()
-    
+    private let grupoDAO: GrupoDAO
+
     init(grupoDAO: GrupoDAO) {
 
         self.grupoDAO = grupoDAO
