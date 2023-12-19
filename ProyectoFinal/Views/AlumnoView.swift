@@ -60,7 +60,7 @@ struct AlumnoView: View {
 
         
         mainVM.alumnoViewModel.updateAlumno(record: alumno)
-        
+        mainVM.objectWillChange.send()
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -68,6 +68,7 @@ struct AlumnoView: View {
     func handleDelete() {
         guard let alumno = alumno else { return }
         mainVM.alumnoViewModel.deleteAlumno(alumno: alumno)
+        mainVM.objectWillChange.send()
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -83,7 +84,7 @@ struct AlumnoView: View {
             idGrupo: mainVM.grupoViewModel.grupos[selectedIdGrupo].id
         )
         mainVM.alumnoViewModel.createAlumno(alumno: alumno)
-        
+        mainVM.objectWillChange.send()
         self.presentationMode.wrappedValue.dismiss()
     }
 

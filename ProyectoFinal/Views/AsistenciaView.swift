@@ -16,6 +16,7 @@ struct AsistenciaView: View {
     
     func handleAdd(){
         mainVM.asistenciaViewModel.createAsistencia(idGrupo: grupoSelected.id!, idTarjeta: tarjetaId, alumnos: mainVM.alumnoViewModel.alumnos)
+        mainVM.objectWillChange.send()
         tarjetaId = ""
     }
     

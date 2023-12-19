@@ -32,6 +32,7 @@ struct GrupoView: View {
         grupo = Grupo(id: grupo.id, materia: materia, carrera: carrera)
         
         mainVM.grupoViewModel.updateGrupo(record: grupo)
+        mainVM.objectWillChange.send()
         // Después de la actualización, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }

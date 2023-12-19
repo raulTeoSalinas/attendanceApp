@@ -27,6 +27,7 @@ struct TarjetaView: View {
     func handleDelete() {
         guard let tarjeta = tarjeta else { return }
         mainVM.tarjetaViewModel.deleteTarjeta(tarjeta: tarjeta)
+        mainVM.objectWillChange.send()
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -35,6 +36,7 @@ struct TarjetaView: View {
     func handleCreate() {
         let tarjeta = Tarjeta(id: tarjetaId)
         mainVM.tarjetaViewModel.createTarjeta(tarjeta: tarjeta)
+        mainVM.objectWillChange.send()
         self.presentationMode.wrappedValue.dismiss()
     }
     

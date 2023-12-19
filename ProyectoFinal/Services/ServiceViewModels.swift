@@ -11,18 +11,15 @@ class ServiceViewModels {
     
     var servicePersistence: ServicePersistence
     var mainViewModel: MainViewModel
-    var alumnoViewModel: AlumnoViewModel
-    var grupoViewModel: GrupoViewModel
-    var tarjetaViewModel: TarjetaViewModel
-    var asistenciaViewModel: AsistenciaViewModel
+
     
     init(servicePersistence: ServicePersistence) {
         self.servicePersistence = servicePersistence
         
-        alumnoViewModel = AlumnoViewModel(alumnosDAO: AlumnoDAO(persistence: servicePersistence.persistence))
-        grupoViewModel = GrupoViewModel(grupoDAO: GrupoDAO(persistence: servicePersistence.persistence))
-        tarjetaViewModel = TarjetaViewModel(tarjetaDAO: TarjetaDAO(persistence: servicePersistence.persistence))
-        asistenciaViewModel = AsistenciaViewModel(asistenciaDAO: AsistenciaDAO(persistence: servicePersistence.persistence))
+        let alumnoViewModel = AlumnoViewModel(alumnosDAO: AlumnoDAO(persistence: servicePersistence.persistence))
+        let grupoViewModel = GrupoViewModel(grupoDAO: GrupoDAO(persistence: servicePersistence.persistence))
+        let tarjetaViewModel = TarjetaViewModel(tarjetaDAO: TarjetaDAO(persistence: servicePersistence.persistence))
+        let asistenciaViewModel = AsistenciaViewModel(asistenciaDAO: AsistenciaDAO(persistence: servicePersistence.persistence))
         mainViewModel = MainViewModel(alumnoViewmodel: alumnoViewModel, tarjetaViewmodel: tarjetaViewModel, grupoViewmodel: grupoViewModel, asistenciaViewmodel: asistenciaViewModel)
         
     }
