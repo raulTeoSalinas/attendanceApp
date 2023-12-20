@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/// `ReportAsistenciaView` es una vista que muestra un informe de asistencias para un grupo específico.
 struct ReportAsistenciaView: View {
     
+    /// ViewModel principal que gestiona los datos de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
 
     
     @State private var alumnoAsistenciaCount: [String: Int] = [:]
     
+    /// Grupo seleccionado para el cual se generará el informe de asistencias.
     let grupoSelected: Grupo
 
     

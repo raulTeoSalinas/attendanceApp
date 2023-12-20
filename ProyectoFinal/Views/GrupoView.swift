@@ -7,15 +7,19 @@
 
 import SwiftUI
 
+/// `GrupoView` es una vista que permite la creación, actualización o eliminación de información sobre un grupo.
 struct GrupoView: View {
     
+    /// El ViewModel principal de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
     
+    /// Control de presentación para navegar hacia atrás.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var materia: String = ""
     @State private var carrera: String = ""
     
+    /// Grupo existente (si se está actualizando) o nulo (si se está creando uno nuevo).
     let grupo: Grupo?
     
     private func updateProperties() {
@@ -40,6 +44,7 @@ struct GrupoView: View {
     func handleDelete() {
         guard let grupo = grupo else { return }
         mainVM.grupoViewModel.deleteGrupo(grupo: grupo)
+        mainVM.objectWillChange.send()
         // Después de la eliminación, navegar hacia atrás
         self.presentationMode.wrappedValue.dismiss()
     }
@@ -49,6 +54,7 @@ struct GrupoView: View {
         let grupo = Grupo(materia: materia, carrera: carrera)
         
         mainVM.grupoViewModel.createGrupo(grupo: grupo)
+        mainVM.objectWillChange.send()
         self.presentationMode.wrappedValue.dismiss()
     }
     

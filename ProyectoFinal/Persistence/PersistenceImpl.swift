@@ -8,21 +8,33 @@
 import Foundation
 import GRDB
 
+/// El protocolo `Persistence` define los requisitos básicos para una capa de persistencia.
+///
+/// Los tipos que lo implementen deben proporcionar una cola de base de datos (`dbQueue`) para realizar operaciones en la base de datos
+/// y la ruta al archivo de la base de datos (`dbPath`).
 protocol Persistence {
-    
+    /// Una cola para realizar operaciones en la base de datos.
     var dbQueue: DatabaseQueue { get }
+    /// La ruta al archivo de la base de datos.
     var dbPath: String { get }
 }
 
+/// `PersistenceImpl` es una implementación de la interfaz ``Persistence`` que proporciona funcionalidad para la capa de persistencia.
+///
+/// Esta estructura gestiona la cola de la base de datos (`dbQueue`) y la ruta al archivo de la base de datos (`dbPath`).
+/// Además, realiza algunas operaciones de inicialización, como la configuración de migraciones y la población inicial de datos.
 struct PersistenceImpl: Persistence {
-    
+    /// La cola para realizar operaciones en la base de datos.
     var dbQueue: DatabaseQueue
+    /// La ruta al archivo de la base de datos.
     var dbPath: String
-    
+    /// Inicializa una nueva instancia de `PersistenceImpl`.
+        /// - Important: Esta inicialización asume que la base de datos ya existe y está configurada.
     init() {
+        /// Configuración de la ruta y la cola de la base de datos.
         dbPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/db.sqlite"
         dbQueue = try! DatabaseQueue(path: dbPath)
-        
+        /// Configuración de migraciones y población de prueba de la base de datos.
         let migrations = Migrations()
         try! migrations.v1(dbQueue: dbQueue)
         do {
@@ -36,6 +48,15 @@ struct PersistenceImpl: Persistence {
 
 extension PersistenceImpl {
     
+    
+    /// Realiza una población ficticia de datos en la base de datos.
+        ///
+        /// Esta función inserta datos de prueba, como tarjetas, grupos y alumnos, en la base de datos
+        /// para propósitos de desarrollo y pruebas. Ten en cuenta que esta población ficticia asume que
+        /// no hay restricciones únicas en las entidades, ya que se insertan datos que podrían violar
+        /// estas restricciones en un entorno de producción.
+        ///
+        /// - Throws: Se lanza un error si ocurre algún problema durante la inserción de datos.
     func fakePopulate() throws {
         
         try dbQueue.write { db in

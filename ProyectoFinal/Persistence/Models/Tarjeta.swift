@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 
+/// Ese es nuestro modelo Tarjeta, para poder ser usado por GRDB y en nuestro ``TarjetaDAO``.
 struct Tarjeta: Codable, Identifiable {
     var id: String
     

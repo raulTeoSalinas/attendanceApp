@@ -7,14 +7,16 @@
 
 import SwiftUI
 
+/// `HomeView` es una vista principal que muestra un menú de opciones para gestionar entidades y asistencias en un sistema escolar.
 struct HomeView: View {
     
+    /// Menú de opciones CRUD para gestionar entidades como Alumnos, Tarjetas y Grupos.
     let menuItemsCrud: [MenuItem] = [
             MenuItem(name: "Alumnos"),
             MenuItem(name: "Tarjetas"),
             MenuItem(name: "Grupos")
     ]
-    
+    /// Menú de opciones para gestionar asistencias.
     let menuItemsAsistencia: [MenuItem] = [
             MenuItem(name: "Asistencia"),
     ]

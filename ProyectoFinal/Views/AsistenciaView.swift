@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+/// `AsistenciaView` es una vista que permite registrar la asistencia de alumnos en un grupo específico.
 struct AsistenciaView: View {
     
+    /// El ViewModel principal de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
     
+    /// Grupo seleccionado para la toma de asistencia.
     let grupoSelected: Grupo
     @State private var tarjetaId: String = ""
     

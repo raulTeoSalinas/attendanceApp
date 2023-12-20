@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+/// `EntityList` es una vista que muestra una lista de entidades (Alumnos, Grupos, Tarjetas o Asistencias) basada en el tipo de entidad proporcionado.
 struct EntityList: View {
     
+    /// El ViewModel principal de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
     
+    /// El tipo de entidad a mostrar en la lista.
     let typeEntity: String
     
     var body: some View {

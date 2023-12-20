@@ -7,14 +7,18 @@
 
 import SwiftUI
 
+/// `TarjetaView` es una vista que permite la gestión de tarjetas, incluyendo la creación y eliminación.
 struct TarjetaView: View {
     
+    /// El ViewModel principal de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
     
+    /// Control de presentación para navegar hacia atrás.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var tarjetaId: String = ""
     
+    /// Tarjeta existente para actualizar o eliminar.
     let tarjeta: Tarjeta?
     
     private func updateProperties() {

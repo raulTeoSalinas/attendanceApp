@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// `MenuAsistenciaView` es una vista que presenta opciones de navegación relacionadas con la asistencia para un grupo específico.
 struct MenuAsistenciaView: View {
     
+    /// Grupo seleccionado para el cual se gestionará la asistencia.
     let grupoSelected: Grupo
     
     var body: some View {

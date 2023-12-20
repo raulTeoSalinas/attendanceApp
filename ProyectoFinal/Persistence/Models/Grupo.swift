@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 
+/// Ese es nuestro modelo Grupo, para poder ser usado por GRDB y en nuestro ``GrupoDAOD``.
 struct Grupo: Codable, Identifiable {
     var id: Int64?
     var materia: String

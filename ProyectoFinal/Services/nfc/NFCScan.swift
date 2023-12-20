@@ -55,14 +55,21 @@ import Foundation
 
 import CoreNFC
 
+/// `NFCScan` es un protocolo que define la interfaz para la lectura de tarjetas NFC.
 protocol NFCScan {
     
+    /// Realiza la lectura de una tarjeta NFC.
+        ///
+        /// - Parameter completion: El bloque de finalización que se llama con el resultado de la lectura.
     func read(completion: @escaping (String) -> Void)
 }
 
+/// `NFCImpl` es una implementación concreta del protocolo ``NFCScan``.
 class NFCImpl: NFCScan {
 
-    
+    /// Realiza la lectura de una tarjeta NFC generando un identificador aleatorio simulando una lectura real.
+        ///
+        /// - Parameter completion: El bloque de finalización que se llama con el resultado de la lectura.
     func read(completion: @escaping (String) -> Void) {
         let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let randomString = String((0..<10).map { _ in characters.randomElement()! })

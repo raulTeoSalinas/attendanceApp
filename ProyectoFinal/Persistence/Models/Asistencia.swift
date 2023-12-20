@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 
+/// Ese es nuestro modelo Asistencia, para poder ser usado por GRDB y en nuestro ``AsistenciaDAO``.
 struct Asistencia: Codable, Identifiable {
     var id: Int64?
     var time: Date

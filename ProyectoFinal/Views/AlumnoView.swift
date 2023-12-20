@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+/// `AlumnoView` es una vista que permite la creación, actualización o eliminación de información sobre un alumno.
 struct AlumnoView: View {
     
-
+    /// El ViewModel principal de la aplicación.
     @EnvironmentObject var mainVM: MainViewModel
     
+    /// Control de presentación para navegar hacia atrás.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var name: String = ""
@@ -24,6 +26,7 @@ struct AlumnoView: View {
     @State private var idsFromAlumnoGrupo: [Int64] = []
     @State private var indexSelectedGrupos: [Int] = []
     
+    /// Alumno existente (si se está actualizando) o nulo (si se está creando uno nuevo).
     let alumno: Alumno?
     
     private func updateProperties() {

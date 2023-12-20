@@ -8,6 +8,7 @@
 import Foundation
 
 
+/// Esta es la declaracion de nuestro Servicio principal. Aqui creamos nuestro servicio ``ServicePersistence`` y nuestro ``ServiceViewModels``
 class ServiceMain: ObservableObject {
     
     var persistence: ServicePersistence

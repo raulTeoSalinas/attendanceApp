@@ -8,6 +8,7 @@
 import Foundation
 import GRDB
 
+/// Ese es nuestro modelo Alumno, para poder ser usado por GRDB y en nuestro ``AlumnoDAO``.
 struct Alumno: Codable, Identifiable {
     var id: Int64?
     var name: String

@@ -8,12 +8,14 @@
 import Foundation
 import GRDB
 
+/// Este enumero nos indica que version del esquema de la base de datos debemos de correr.
 enum MigrationVersion: String {
     
     case v1 = "v1"
     case v2 = "v2"
 }
 
+/// Esta clase es la genera el esquema de nuestra base datos `SQLite` y tambien genera nuestras migraciones.
 class Migrations {
     
     func v1(dbQueue: DatabaseQueue) throws {
