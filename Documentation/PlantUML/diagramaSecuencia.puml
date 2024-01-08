@@ -1,0 +1,219 @@
+@startuml
+title SecuenceDiagram
+
+actor Alumno
+actor Profesor
+participant App
+participant TarjetaNFC
+participant AlumnoViewModel
+participant TarjetaViewModel
+participant AsistenciaViewModel
+participant AsistenciaDAO
+participant AlumnoDAO
+participant GrupoViewModel
+participant GrupoDAO
+
+note over App: App de Asistencia\na traves de tarjetas NFC
+
+
+
+
+activate Alumno
+Alumno -> App: Encender app (Alumno)
+activate App
+deactivate Alumno
+
+
+Profesor -> App: Encender app (Profesor)
+activate Profesor
+deactivate Profesor
+
+
+
+
+group Ingresar Informacion del Nuevo Alumno
+Profesor -> Alumno: Registrar nuevo alumno
+activate Alumno
+Profesor --> Alumno: Informacion del nuevo alumno
+deactivate Alumno
+  alt Registro exitoso
+    Profesor -> AlumnoViewModel: Ingresar informacion del nuevo alumno
+    activate AlumnoViewModel
+    
+    AlumnoViewModel --> AlumnoDAO: Guardar nuevo alumno
+    activate AlumnoDAO
+    AlumnoDAO --> AlumnoViewModel: Confirmacion de registro
+    
+    deactivate AlumnoDAO
+    Alumno -> TarjetaNFC: Escanea tarjeta NFC
+    activate TarjetaNFC
+    TarjetaNFC -> AlumnoViewModel: Obtener informacion de tarjeta
+    AlumnoViewModel --> TarjetaDAO: Guardar informacion de tarjeta
+    deactivate TarjetaNFC
+    activate TarjetaDAO
+    TarjetaDAO --> AlumnoViewModel: Informacion de tarjeta
+    deactivate TarjetaDAO
+    
+
+    AlumnoViewModel --> App: Confirmacion de registro
+    deactivate AlumnoViewModel
+  else Informacion duplicada
+    AlumnoViewModel --> App: Alumno ya existe
+    deactivate AlumnoViewModel
+  else Tarjeta duplicada
+    AlumnoViewModel --> App: La tarjeta ya esta asignada a otro alumno
+    deactivate AlumnoViewModel
+  else Espacio Insuficiente
+    AlumnoViewModel --> App: No hay espacio suficiente en el dispositivo
+    deactivate AlumnoViewModel
+  else Inputs Invalidos
+    AlumnoViewModel --> App: Revisa que tus entradas sean validas
+    deactivate AlumnoViewModel
+  end
+end
+
+
+group Actualizar Informacion del Alumno
+
+Profesor -> Alumno: Actualizar informacion del alumno
+activate Alumno
+Profesor --> Alumno: Nueva informacion del alumno
+deactivate Alumno
+
+  alt Actualizacion exitosa
+    Profesor -> AlumnoViewModel: Actualizar informacion del alumno
+    activate AlumnoViewModel
+    AlumnoViewModel --> AlumnoDAO: Actualizar informacion del alumno
+    activate AlumnoDAO
+    AlumnoDAO --> AlumnoViewModel: Confirmacion de actualizacion
+    deactivate AlumnoDAO
+    AlumnoViewModel --> App: Confirmacion de actualizacion
+    deactivate AlumnoViewModel
+  else Espacio Insuficiente
+    AlumnoViewModel --> App: No hay espacio suficiente en el dispositivo
+    deactivate AlumnoViewModel
+  else Inputs Invalidos
+    AlumnoViewModel --> App: Revisa que tus entradas sean validas
+    deactivate AlumnoViewModel
+  end
+end
+
+group Eliminar Alumno
+  alt Eliminacion exitosa
+    Profesor -> AlumnoViewModel: Eliminar alumno
+    activate AlumnoViewModel
+    AlumnoViewModel --> AlumnoDAO: Borrar informacion del alumno
+    activate AlumnoDAO
+    AlumnoDAO --> AlumnoViewModel: Confirmacion de borrado
+    deactivate AlumnoDAO
+    AlumnoViewModel --> App: Confirmacion de borrado
+    deactivate AlumnoViewModel
+  else No se encontro ID
+    AlumnoViewModel --> App: No se encontro el ID del alumno, revisa tu ID
+    deactivate AlumnoViewModel
+  end
+end
+
+group Crear grupos
+  alt Creacion exitosa
+    Profesor -> GrupoViewModel: Crear nuevo grupo
+    activate GrupoViewModel
+    GrupoViewModel --> GrupoDAO: Guardar nuevo grupo
+    activate GrupoDAO
+    GrupoDAO --> GrupoViewModel: Confirmacion de creacion
+    deactivate GrupoDAO
+    GrupoViewModel --> App: Confirmacion de creacion
+    deactivate GrupoViewModel
+  else Informacion duplicada
+    AlumnoViewModel --> App: Grupo ya existe
+    deactivate GrupoViewModel
+  else Espacio Insuficiente
+    AlumnoViewModel --> App: No hay espacio suficiente en el dispositivo
+    deactivate GrupoViewModel
+  else Inputs Invalidos
+    AlumnoViewModel --> App: Revisa que tus entradas sean validas
+    deactivate GrupoViewModel
+  end
+end
+
+group Actualizar Informacion del Grupo
+  alt Actualizacion exitosa
+    Profesor -> GrupoViewModel: Actualizar informacion del grupo
+    activate GrupoViewModel
+    GrupoViewModel --> GrupoDAO: Actualizar informacion del grupo
+    activate GrupoDAO
+    GrupoDAO --> GrupoViewModel: Confirmacion de actualizacion
+    deactivate GrupoDAO
+    GrupoViewModel --> App: Confirmacion de actualizacion
+    deactivate GrupoViewModel
+  else Espacio Insuficiente
+    GrupoViewModel --> App: No hay espacio suficiente en el dispositivo
+    deactivate GrupoViewModel
+  else Inputs Invalidos
+    GrupoViewModel --> App: Revisa que tus entradas sean validas
+    deactivate GrupoViewModel
+  end
+end
+
+group Eliminar Grupo
+  alt Eliminacion exitosa
+    Profesor -> GrupoViewModel: Eliminar grupo
+    activate GrupoViewModel
+    GrupoViewModel --> GrupoDAO: Borrar informacion del grupo
+    activate GrupoDAO
+    GrupoDAO --> GrupoViewModel: Confirmacion de borrado
+    deactivate GrupoDAO
+    GrupoViewModel --> App: Confirmacion de borrado
+    deactivate GrupoViewModel
+  else No se encontro ID
+    GrupoViewModel --> App: No se encontro el ID del grupo, revisa tu ID
+    deactivate GrupoViewModel
+  end
+end
+
+group Consultar Reporte de Asistencias
+  alt Consulta exitosa
+    Profesor -> AsistenciaDAO: Consultar reporte de asistencias
+    activate AsistenciaDAO
+    AsistenciaDAO --> App: Reporte de asistencias
+    deactivate AsistenciaDAO
+  else No hay datos
+    AsistenciaDAO --> App: No hay datos de asistencias
+    deactivate AsistenciaDAO
+  end
+end
+
+group Registrar Asistencia
+  alt Escaneo exitoso
+    Alumno -> TarjetaNFC: Escanea tarjeta NFC
+    activate TarjetaNFC
+    TarjetaNFC -> TarjetaViewModel: Obtener informacion de tarjeta
+    activate TarjetaViewModel
+
+    TarjetaViewModel --> App: Informacion de tarjeta
+    deactivate TarjetaViewModel
+    deactivate TarjetaNFC
+    alt Registro exitoso
+      App -> AsistenciaViewModel: Registrar asistencia
+      activate AsistenciaViewModel
+      AsistenciaViewModel --> AsistenciaDAO: Guardar registro de asistencia
+      activate AsistenciaDAO
+      AsistenciaDAO --> AsistenciaViewModel: Confirmacion de registro
+      deactivate AsistenciaDAO
+      AsistenciaViewModel --> App: Confirmacion de registro
+      deactivate AsistenciaViewModel
+    else Asistencia duplicada
+      AsistenciaViewModel --> App: Ya tomaste asistencia
+      deactivate AsistenciaViewModel
+    end
+  else Error al escanear
+    TarjetaNFC --> App: Vuelve a intentarlo con otra tarjeta diferente
+    deactivate TarjetaNFC
+  end
+end
+
+deactivate App
+deactivate Profesor
+deactivate Alumno
+
+@enduml

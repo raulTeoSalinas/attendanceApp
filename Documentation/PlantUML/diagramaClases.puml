@@ -1,0 +1,188 @@
+@startuml
+' STYLE START
+hide empty members
+skinparam shadowing false
+' STYLE END
+set namespaceSeparator none
+
+class "Persistence" as Persistence << (P, GoldenRod) protocol >> { 
+  ~dbQueue : DatabaseQueue
+  ~dbPath : String 
+}
+class "NFCScan" as NFCScan << (P, GoldenRod) protocol >> { 
+  ~read(completion:) 
+}
+class "ProyectoFinalApp" as ProyectoFinalApp << (S, SkyBlue) struct >> { 
+  ~main
+  ~body : some Scene 
+}
+class "GrupoDAO" as GrupoDAO << (C, DarkSeaGreen) >> { 
+  ~persistence : Persistence
+  ~init(persistence:)
+  ~createGrupo(grupo:)
+  ~getGrupos()
+  ~updateGrupo(record:)
+  ~deleteGrupo(record:) 
+}
+class "AsistenciaDAO" as AsistenciaDAO << (C, DarkSeaGreen) >> { 
+  ~persistence : Persistence
+  ~init(persistence:)
+  ~getAsistencias()
+  ~createAsistencia(asistencia:) 
+}
+class "AlumnoDAO" as AlumnoDAO << (C, DarkSeaGreen) >> { 
+  ~persistence : Persistence
+  ~init(persistence:)
+  ~createAlumno(alumno:)
+  ~getAlumno(id:)
+  ~getAlumnos()
+  ~updateAlumno(record:)
+  ~deleteAlumno(alumno:) 
+}
+class "Alumno" as Alumno << (S, SkyBlue) struct >> { 
+  ~id : Int64?
+  ~name : String
+  ~lastname1 : String
+  ~lastname2 : String
+  ~academicId : String
+  ~idTarjeta : String
+  ~idGrupo : Int64?
+  ~init(id:name:lastname1:lastname2:academicId:idTarjeta:idGrupo:) 
+}
+
+class "Tarjeta" as Tarjeta << (S, SkyBlue) struct >> { 
+  ~id : String
+  ~init(id:) 
+}
+class "Grupo" as Grupo << (S, SkyBlue) struct >> { 
+  ~id : Int64?
+  ~materia : String
+  ~carrera : String
+  ~init(id:materia:carrera:) 
+}
+class "Asistencia" as Asistencia << (S, SkyBlue) struct >> { 
+  ~id : Int64?
+  ~time : Date
+  ~idGrupo : Int64
+  ~idAlumno : Int64
+  ~init(id:time:idGrupo:idAlumno:) 
+}
+class "TarjetaDAO" as TarjetaDAO << (C, DarkSeaGreen) >> { 
+  ~persistence : Persistence
+  ~init(persistence:)
+  ~createTarjeta(tarjeta:)
+  ~getTarjetas()
+  ~deleteTarjeta(tarjeta:) 
+}
+class "MigrationVersion" as MigrationVersion << (E, LightSteelBlue) enum >> { 
+  ~v1
+  ~v2 
+}
+class "Migrations" as Migrations << (C, DarkSeaGreen) >> { 
+  ~v1(dbQueue:) 
+}
+class "PersistenceImpl" as PersistenceImpl << (S, SkyBlue) struct >> { 
+  ~dbQueue : DatabaseQueue
+  ~dbPath : String
+  ~init() 
+}
+class "AsistenciaViewModel" as AsistenciaViewModel << (C, DarkSeaGreen) >> { 
+  ~asistencias
+  -asistenciaDAO : AsistenciaDAO
+  ~init(asistenciaDAO:)
+  ~searchAlumnoByIdCard(idTarjeta:alumnos:)
+  ~createAsistencia(idGrupo:idTarjeta:alumnos:)
+  ~getAlumnoAsistenciaCount(grupo:alumnos:) 
+}
+class "GrupoViewModel" as GrupoViewModel << (C, DarkSeaGreen) >> { 
+  ~grupos
+  -grupoDAO : GrupoDAO
+  ~init(grupoDAO:)
+  ~createGrupo(grupo:)
+  ~updateGrupo(record:)
+  ~deleteGrupo(grupo:) 
+}
+class "AlumnoViewModel" as AlumnoViewModel << (C, DarkSeaGreen) >> { 
+  ~alumnos
+  -alumnosDAO : AlumnoDAO
+  ~init(alumnosDAO:)
+  ~createAlumno(alumno:)
+  ~updateAlumno(record:)
+  ~deleteAlumno(alumno:) 
+}
+class "MainViewModel" as MainViewModel << (C, DarkSeaGreen) >> { 
+  ~alumnoViewModel : AlumnoViewModel
+  ~grupoViewModel : GrupoViewModel
+  ~tarjetaViewModel : TarjetaViewModel
+  ~asistenciaViewModel : AsistenciaViewModel
+  ~init(alumnoViewmodel:tarjetaViewmodel:grupoViewmodel:asistenciaViewmodel:) 
+}
+class "TarjetaViewModel" as TarjetaViewModel << (C, DarkSeaGreen) >> { 
+  ~tarjetas
+  -tarjetaDAO : TarjetaDAO
+  -serviceNFC : ServiceNFC
+  ~init(tarjetaDAO:)
+  ~createTarjeta(tarjeta:)
+  ~deleteTarjeta(tarjeta:)
+  ~handleScan(completion:) 
+}
+
+
+
+class "ServicePersistence" as ServicePersistence << (C, DarkSeaGreen) >> { 
+  ~persistence : Persistence
+  ~init() 
+}
+class "ServiceMain" as ServiceMain << (C, DarkSeaGreen) >> { 
+  ~persistence : ServicePersistence
+  ~serviceVm : ServiceViewModels
+  ~init() 
+}
+class "ServiceNFC" as ServiceNFC << (C, DarkSeaGreen) >> { 
+  ~nfc : NFCScan
+  ~init()
+  ~read(completion:) 
+}
+class "NFCImpl" as NFCImpl << (C, DarkSeaGreen) >> { 
+  ~read(completion:) 
+}
+class "ServiceViewModels" as ServiceViewModels << (C, DarkSeaGreen) >> { 
+  ~servicePersistence : ServicePersistence
+  ~mainViewModel : MainViewModel
+  ~init(servicePersistence:) 
+}
+
+
+Persistence <|.. PersistenceImpl : conforms to
+ProyectoFinalApp -- ServiceMain
+AlumnoViewModel -- AlumnoDAO
+GrupoViewModel -- GrupoDAO
+TarjetaViewModel -- TarjetaDAO
+AsistenciaViewModel -- AsistenciaDAO
+
+GrupoDAO "1" *-- "many" Grupo: uses
+
+AsistenciaDAO "1" *-- "many" Asistencia: uses
+
+AlumnoDAO "1" *-- "many" Alumno: uses
+
+TarjetaDAO "1" *-- "many" Tarjeta: uses
+
+MainViewModel  --  AlumnoViewModel
+MainViewModel  --  GrupoViewModel
+MainViewModel  --  TarjetaViewModel
+MainViewModel  -- AsistenciaViewModel
+
+ServicePersistence  --  Persistence
+ServiceMain  --  ServiceViewModels
+ServiceMain  --  ServicePersistence
+ServiceNFC  --  NFCImpl
+TarjetaViewModel -- ServiceNFC
+NFCImpl ..|> NFCScan: implements
+Migrations -- MigrationVersion
+PersistenceImpl  --  Migrations
+
+ServiceViewModels  <..  ServicePersistence
+ServiceViewModels  --  MainViewModel
+
+@enduml
